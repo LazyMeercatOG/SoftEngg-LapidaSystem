@@ -35,7 +35,7 @@
           <div class="col-lg-8">
             <div class="p-5">
               <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Create an Account as User!!</h1>
+                <h1 class="h4 text-gray-900 mb-4">Create an Account as User</h1>
               </div>
               <form method="POST">
                 {% csrf_token %}
@@ -44,10 +44,7 @@
               </form>
               <hr>
               <div class="text-center">
-                <a class="small" href="{% url 'password_reset' %}">Forgot Password?</a>
-              </div>
-              <div class="text-center">
-                <a class="small" href="{% url 'login' %}">Already have an account?</a>
+                <a class="small" href="{% url 'login' %}">Already have an account? Log in</a>
               </div>
               <div class="text-center">
                 <a class="small" href="{% url 'home' %}">Home</a>
