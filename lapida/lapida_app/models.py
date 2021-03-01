@@ -7,6 +7,11 @@ GENDER_CHOICES = (
         ('F', 'Female'),
         ('O','Others'),
     )
+STORAGE_CHOICES=(
+("C", "Cemetery"),
+("CO", "Columbarium"),
+)
+
 
 class Profile(models.Model):
 	user = models.OneToOneField(User,on_delete=models.CASCADE)
@@ -14,3 +19,13 @@ class Profile(models.Model):
 	phone = PhoneNumberField()
 	def __str__(self):
 		return f'{self.user.username} Profile'
+
+class User_Place(models.Model):
+	user = models.OneToOneField(User,on_delete=models.CASCADE)
+	name = models.CharField(max_length=60)
+	category = models.CharField(max_length=2, choices=STORAGE_CHOICES) 
+	blk = models.CharField(max_length=3)
+	street = models.CharField(max_length=12)
+	lot = models.CharField(max_length=3)
+	def __str__(self):
+		return f'{self.user.username} User_Place'

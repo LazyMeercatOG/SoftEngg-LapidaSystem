@@ -5,10 +5,11 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
-from .decorators import unathenticated_user
+from .decorators import unathenticated_user, allowed_users
 
 
 @login_required(login_url='login')
+#@allowed_users(allowed_roles=['admin'])
 def index(request):
 	return render(request, 'lapida_app/index.html')
 
@@ -65,5 +66,11 @@ def register(request):
 			   print(msg)
 		context = {'form':form,'form_1':form_1}
 		return render(request, 'lapida_app/register.html',context)
+
+def create_dead(request):
+	return render(request, 'lapida_app/register_dead.html')
+
+def profile(request):
+	return render(request, 'lapida_app/profile.html')
 
 # Create your views here.

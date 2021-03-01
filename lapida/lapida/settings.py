@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'lapida_app',
     'widget_tweaks',
     'sweetify',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
