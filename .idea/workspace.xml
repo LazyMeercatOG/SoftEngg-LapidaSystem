@@ -2,7 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21246637-0973-4c9d-9f76-6c58e784921b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/lapida/lapida_app/decorators.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lapida/lapida_app/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lapida/lapida_app/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lapida/lapida_app/templates/lapida_app/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lapida/lapida_app/templates/lapida_app/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lapida/lapida_app/templates/lapida_app/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lapida/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/lapida/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lapida/lapida/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/lapida/lapida/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lapida/lapida_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/lapida/lapida_app/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lapida/lapida_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/lapida/lapida_app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lapida/lapida_app/templates/lapida_app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/lapida/lapida_app/templates/lapida_app/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lapida/lapida_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/lapida/lapida_app/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lapida/lapida_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/lapida/lapida_app/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
