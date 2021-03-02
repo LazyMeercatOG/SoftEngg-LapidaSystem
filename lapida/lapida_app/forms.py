@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
 from phonenumber_field.formfields import PhoneNumberField
-from .models import Profile
+from .models import Profile, User_Place
 
 
 
@@ -31,6 +31,28 @@ class ProfileForm(forms.ModelForm):
             'phone': forms.TextInput(attrs={'class':'input--style-4'}), 
             'gender': forms.TextInput(), 
             }
-       
+
+
+class User_PlaceForm(forms.ModelForm):
+	class Meta:
+		model = User_Place
+		last_name = models.CharField(max_length=60)
+		first_name = models.CharField(max_length=60)
+		middle_name = models.CharField(max_length=60)
+		category = models.CharField(max_length=2) 
+		blk = models.CharField(max_length=3)
+		street = models.CharField(max_length=12)
+		lot = models.CharField(max_length=3)	
+		fields = ['last_name','first_name','middle_name','category','blk', 'street', 'lot']
+		widgets = {
+            'last_name': forms.TextInput(attrs={'class':'form-control', 'required': True, 'placeholder': "Last Name"}),
+            'first_name': forms.TextInput(attrs={'class':'form-control', 'required': True, 'placeholder': "First Name"}),
+            'middle_name': forms.TextInput(attrs={'class':'form-control', 'required': True, 'placeholder': "Middle Name"}),
+            'blk': forms.TextInput(attrs={'class':'form-control', 'required': True, 'placeholder': "Block"}),
+            'street': forms.TextInput(attrs={'class':'form-control','required': True, 'placeholder': "Street"}),
+            'lot': forms.TextInput(attrs={'class':'form-control', 'required': True, 'placeholder': "Lot"}),           
+            }		
+
+
 
 

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'sweetify',
     'phonenumber_field',
+    'django_tables2',
 ]
 
 MIDDLEWARE = [

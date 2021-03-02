@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm, ProfileForm
+from .forms import CreateUserForm, ProfileForm, User_PlaceForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
 from .decorators import unathenticated_user, allowed_users
-
+from django.contrib.auth.models import Group
+from .models import User_Place
 
 @login_required(login_url='login')
 #@allowed_users(allowed_roles=['admin'])
@@ -51,7 +52,9 @@ def register(request):
 			form_1.gender = gender
 			if form.is_valid() and form_1.is_valid():
 				user = form.save()
-				form_1 = form_1.save(commit=False)			
+				form_1 = form_1.save(commit=False)
+				group = Group.objects.get(name="customer")	
+				user.groups.add(group)		
 				form_1.user = user
 				form_1.save()
 				username = form.cleaned_data.get('username')
@@ -68,9 +71,23 @@ def register(request):
 		return render(request, 'lapida_app/register.html',context)
 
 def create_dead(request):
-	return render(request, 'lapida_app/register_dead.html')
+	if request.method == "POST":
+		form = User_PlaceForm(request.POST)
+		form.category = request.POST.get('category')
+		if form.is_valid():
+			dead = form.save(commit=False)
+			dead.user = request.user
+			dead.save()
+			return redirect('profile')
+	else:
+		form = User_PlaceForm()
+	context = {'form':form}
+	return render(request, 'lapida_app/register_dead.html',context)
 
 def profile(request):
-	return render(request, 'lapida_app/profile.html')
+	query_results = User_Place.objects.filter(user=request.user)
+	context = {'form':query_results}
+	return render(request, 'lapida_app/profile.html',context)
+
 
 # Create your views here.

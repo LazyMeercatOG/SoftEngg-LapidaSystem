@@ -21,8 +21,10 @@ class Profile(models.Model):
 		return f'{self.user.username} Profile'
 
 class User_Place(models.Model):
-	user = models.OneToOneField(User,on_delete=models.CASCADE)
-	name = models.CharField(max_length=60)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	last_name = models.CharField(max_length=60)
+	first_name = models.CharField(max_length=60)
+	middle_name = models.CharField(max_length=60)
 	category = models.CharField(max_length=2, choices=STORAGE_CHOICES) 
 	blk = models.CharField(max_length=3)
 	street = models.CharField(max_length=12)
