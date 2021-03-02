@@ -36,6 +36,7 @@ class ProfileForm(forms.ModelForm):
 class User_PlaceForm(forms.ModelForm):
 	class Meta:
 		model = User_Place
+		uid = models.CharField(max_length=50)
 		last_name = models.CharField(max_length=60)
 		first_name = models.CharField(max_length=60)
 		middle_name = models.CharField(max_length=60)
@@ -43,8 +44,9 @@ class User_PlaceForm(forms.ModelForm):
 		blk = models.CharField(max_length=3)
 		street = models.CharField(max_length=12)
 		lot = models.CharField(max_length=3)	
-		fields = ['last_name','first_name','middle_name','category','blk', 'street', 'lot']
+		fields = ['uid','last_name','first_name','middle_name','category','blk', 'street', 'lot']
 		widgets = {
+			'uid': forms.TextInput(attrs={'class':'form-control', 'required': True}),			
             'last_name': forms.TextInput(attrs={'class':'form-control', 'required': True, 'placeholder': "Last Name"}),
             'first_name': forms.TextInput(attrs={'class':'form-control', 'required': True, 'placeholder': "First Name"}),
             'middle_name': forms.TextInput(attrs={'class':'form-control', 'required': True, 'placeholder': "Middle Name"}),

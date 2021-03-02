@@ -36,7 +36,7 @@ class MasterData(models.Model):
 
 class User_Place(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	uid = models.ForeignKey(MasterData,on_delete=models.CASCADE,default="hIP1ToECJxcUfazI")
+	uid = models.ForeignKey(MasterData,on_delete=models.CASCADE)
 	last_name = models.CharField(max_length=60)
 	first_name = models.CharField(max_length=60)
 	middle_name = models.CharField(max_length=60)
