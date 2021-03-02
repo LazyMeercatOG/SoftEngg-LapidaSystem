@@ -26,63 +26,49 @@
 		<div class="wrapper">
 			<div class="inner">
 				<form action="">
-					<h3>Find a Room</h3>
+					<h3>Register a loved one</h3>
 					<div class="form-row">
 						<div class="form-wrapper">
-							<label for="">Name *</label>
-							<input type="text" class="form-control" placeholder="Decease Name">
+							<label for="">Name of the Deceased*</label>
+							<input type="text" class="form-control" placeholder="Last Name">
+							<br>
+							<input type="text" class="form-control" placeholder="First Name">
+							<br>
+							<input type="text" class="form-control" placeholder="Middle Name">
+							<br>
+								<label for="">Category</label>
+						<div class="form-check">
+						  <input class="form-check-input" type="radio" name="flexRadioDefault" id="category_rad1" checked>
+						  <label class="form-check-label" for="category_rad1">
+							Traditional Cemetery
+						  </label>
 						</div>
-						<div class="form-wrapper">
-							<label for="">Phone *</label>
-							<input type="text" class="form-control" placeholder="Phone">
+						<div class="form-check">
+						  <input class="form-check-input" type="radio" name="flexRadioDefault" id="category_rad2">
+						  <label class="form-check-label" for="category_rad2">
+							Columbarium
+						  </label>
+						</div>
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="form-wrapper">
-							<label for="">Check-in *</label>
-							<span class="lnr lnr-calendar-full"></span>
-							<input type="text" class="form-control datepicker-here" data-language='en' data-date-format="dd M yyyy" id="dp1">
+							<label for="">Block*</label>
+							<input type="text" class="form-control">
 						</div>
 						<div class="form-wrapper">
-							<label for="">Check-out *</label>
-							<span class="lnr lnr-calendar-full"></span>
-							<input type="text" class="form-control datepicker-here" data-language='en'  data-date-format="dd M yyyy" id="dp2">
+							<label for="">Street*</label>
+							<input type="text" class="form-control">
 						</div>
 					</div>
 					<div class="form-row last">
 						<div class="form-wrapper">
-							<label for="">Adults *</label>
-							<select name="" id="" class="form-control">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-							</select>
-							<i class="zmdi zmdi-chevron-down"></i>
-						</div>
-						<div class="form-wrapper">
-							<label for="">Chidren *</label>
-							<select name="" id="" class="form-control">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-							</select>
-							<i class="zmdi zmdi-chevron-down"></i>
+							<label for="">Lot*</label>
+							<input type="text" class="form-control">
 						</div>
 					</div>
-					<div class="checkbox">
-						<label>
-							<input type="checkbox"> No one rejects, dislikes, or avoids pleasure itself.
-							<span class="checkmark"></span>
-						</label>
-					</div>
-					<button data-text="Book Room">
-						<span>Book Room</span>
+					<button data-text="Register">
+						<span>Register</span>
 					</button>
 				</form>
 			</div>
