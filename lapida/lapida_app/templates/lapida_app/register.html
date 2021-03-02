@@ -1,0 +1,160 @@
+{% extends "lapida_app/base.html" %}
+{% load static %}
+{% block content  %}
+
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title Page-->
+    <title>Au Register Forms by Colorlib</title>
+    <!-- Icons font CSS-->
+    <link href="{% static 'chat/register/vendor/mdi-font/css/material-design-iconic-font.min.css'%}" rel="stylesheet" media="all">
+    <link href="{% static 'chat/register/vendor/font-awesome-4.7/css/font-awesome.min.css'%}" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'chat/css/templatemo-style1.css'%}">
+    <!-- Vendor CSS-->
+    <!-- Main CSS-->
+    <link href="{% static 'chat/register/css/main.css'%}" rel="stylesheet" media="all">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<body onload="data_privacy_alert()">
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Registration Form</h2>
+                    <form method="POST">
+                    	<label class="label">
+                            {% for field in form %}
+                            {% if field.errors %}
+                                {%if field.label == "Password confirmation"%}
+                            <label class="label">Password</label>
+                            {%else%}
+                            <label class="label">{{field.label}}</label>
+                            {%endif%}
+                            {% for error in field.errors %}
+                                <strong>{{error}}</strong>
+                                {%endfor%}
+                                {%endif%}
+                                {%endfor%}
+                        {% for field_1 in form_1 %}
+                           {% if field_1.errors %}
+                            <label class="label">{{field_1.label}}</label>
+                            {% for error_1 in field_1.errors %}
+                                <strong>{{error_1}}</strong>
+                                {%endfor%}
+                                {%endif%}
+                                {%endfor%}
+                            </label>
+                    		{%csrf_token%}
+                            <br>
+                     <div class="input-group">
+                            <label class="label">Username</label>
+                            <div class="input-group">
+                                   {{form.username}}
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">first name</label>
+                                    {{form.first_name}}
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">last name</label>
+                                    {{form.last_name}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Phone Number</label>
+                                   {{form_1.phone}}
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Gender</label>
+                                    <div class="p-t-10">
+                                        <label class="radio-container m-r-45">Male
+                                            <input type="radio" checked="checked" name="gender" value ="M">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="radio-container">Female
+                                            <input type="radio" name="gender" value ="F">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="radio-container">Prefer Not to Say
+                                            <input type="radio" name="gender" value ="O">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                          {% load widget_tweaks %}
+                            <div class="input-group">
+                                    <label class="label">Email</label>
+                                    {{form.email|add_class:"input--style-4"}}
+                            </div>
+                          
+                        <div class="input-group">
+                            <label class="label">Password</label>
+                            <div class="input-group">
+                                    {{ form.password1|add_class:"input--style-4"}}
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="label">Confirmed Password</label>
+                            <div class="input-group">
+                                     {{ form.password2|add_class:"input--style-4"}}<br><br>
+                            </div>
+                        </div>
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'chat/register/vendor/jquery/jquery.min.js'%}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static 'chat/register/vendor/select2/select2.min.js'%}"></script>
+
+
+    <!-- Main JS-->
+    <script src="{% static 'chat/register/js/global.js'%}"></script>
+
+<script>
+function data_privacy_alert(){
+    swal({title: "Data Privacy Act",
+        text: "We as administrator of this website, shall not disclose the user's personal information without their consent and shall only use this information for events and partner companies/organizations relevant to the objective of this website. Furthermore, administrators shall only retain this information for a period of one year. These conditions shall then be strictly implemented in compliance with the Philippine Data Privacy Act of 2012 (DPA) http://www.officialgazette.gov.ph/2012/08/15/republic-act-no-10173/ to protect your right to data privacy. By checking (I agree), you have read the organizer's Data Privacy Statement and express your consent for the organizer's to collect, record, organize, update or modify, retrieve, consult, use, consolidate, block, erase or destruct your personal data as part of your information.",
+        type: "success",
+         buttons: {
+        confirm: {
+          text: "I agree",
+          value: true,
+          visible: true,
+          className: "",
+          closeModal: true
+        }
+      }
+
+    })
+}
+
+</script>
+
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->
+{%endblock content%}

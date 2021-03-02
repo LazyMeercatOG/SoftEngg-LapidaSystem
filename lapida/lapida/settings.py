@@ -122,3 +122,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
+LOGIN_REDIRECT_URL = 'home-view'
