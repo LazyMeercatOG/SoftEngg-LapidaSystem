@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
 from .decorators import unathenticated_user, allowed_users
 from django.contrib.auth.models import Group
-from .models import User_Place
+from .models import User_Place, MasterData
 
 @login_required(login_url='login')
 #@allowed_users(allowed_roles=['admin'])

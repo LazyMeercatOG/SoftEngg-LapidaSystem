@@ -4,8 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
 from phonenumber_field.formfields import PhoneNumberField
-from .models import Profile, User_Place
-
+from .models import Profile, User_Place, MasterData
 
 
 class CreateUserForm(UserCreationForm):
@@ -31,8 +30,7 @@ class ProfileForm(forms.ModelForm):
             'phone': forms.TextInput(attrs={'class':'input--style-4'}), 
             'gender': forms.TextInput(), 
             }
-
-
+	
 class User_PlaceForm(forms.ModelForm):
 	class Meta:
 		model = User_Place
@@ -53,7 +51,7 @@ class User_PlaceForm(forms.ModelForm):
             'blk': forms.TextInput(attrs={'class':'form-control', 'required': True, 'placeholder': "Block"}),
             'street': forms.TextInput(attrs={'class':'form-control','required': True, 'placeholder': "Street"}),
             'lot': forms.TextInput(attrs={'class':'form-control', 'required': True, 'placeholder': "Lot"}),           
-            }		
+            }
 
 
 

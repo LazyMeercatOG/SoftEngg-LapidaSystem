@@ -22,11 +22,13 @@
 	</head>
 
 	<body>
-
 		<div class="wrapper">
 			<div class="inner">
 				<form method = "POST">
 					{% csrf_token %}
+					{% for error in form.uid.errors %}
+					<p class="help is-danger">{{error}}</p>
+					{%endfor%}
 					<h3>Register a loved one</h3>
 					<div class="form-row">
 						<div class="form-wrapper">
