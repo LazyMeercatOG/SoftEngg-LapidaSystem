@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
 from phonenumber_field.formfields import PhoneNumberField
-from .models import Profile, User_Place
+from .models import Profile, User_Place, MasterData_Revised
 
 
 class CreateUserForm(UserCreationForm):
@@ -39,6 +39,15 @@ class User_PlaceForm(forms.ModelForm):
 		widgets = {
 			'uid': forms.TextInput(attrs={'class':'form-control', 'required': True}),			
             }
+		# def clean_uid(self):
+		# 	uid = self.cleaned_data.get('uid')
+		# 	try:
+		# 	   dead = MasterData_Revised.objects.get(uid = uid)
+		# 	   print(dead)
+		# 	except ObjectDoesNotExist:
+		# 	   raise forms.ValidationError('The UID you inputted was not found in our database')
+		# 	return uid
+
 
 
 

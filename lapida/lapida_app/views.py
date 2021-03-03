@@ -9,6 +9,8 @@ from .decorators import unathenticated_user, allowed_users
 from django.contrib.auth.models import Group
 from .models import User_Place, MasterData_Revised
 from .resources import MasterData_RevisedResource
+from django.core.exceptions import ObjectDoesNotExist
+
 
 
 @login_required(login_url='login')
@@ -76,6 +78,10 @@ def create_dead(request):
 	if request.method == "POST":
 		form = User_PlaceForm(request.POST)
 		uid = request.POST.get('uid')
+		try:
+			dead = MasterData_Revised.objects.get(uid=uid)
+		except ObjectDoesNotExist:
+			messages.error(request, 'The UID you inputted was not found in our database')
 		if form.is_valid():
 			dead = form.save(commit=False)
 			dead.user = request.user

@@ -26,9 +26,11 @@
 			<div class="inner">
 				<form method = "POST">
 					{% csrf_token %}
-					{% for error in form.uid.errors %}
-					<p class="help is-danger">{{error}}</p>
-					{%endfor%}
+					{%if messages%}
+					{% for message in messages %}
+					  <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+					    {% endfor %}
+					{% endif %}
 					<h3>Register a loved one</h3>
 					<div class="form-row">
 						<div class="form-wrapper">

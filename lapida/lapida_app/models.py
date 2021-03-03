@@ -12,6 +12,14 @@ STORAGE_CHOICES=(
 ("CO", "Columbarium"),
 )
 
+Status=(
+("P", "Pending"),
+("R", "Returned"),
+("C", "Completed"),
+("Pa", "Paid"),
+("O","Ongoing")
+)
+
 
 class Profile(models.Model):
 	user = models.OneToOneField(User,on_delete=models.CASCADE)
@@ -40,5 +48,18 @@ class User_Place(models.Model):
 	uid = models.ForeignKey(MasterData_Revised,to_field="uid", db_column="uid" ,on_delete=models.CASCADE)
 	def __str__(self):
 		return f'{self.uid}'
+
+
+# class Order_User(models.Model):
+# 	profile_dead = models.ForeignKey(User_Place, on_delete=models.CASCADE)
+# 	status = models.CharField(max_length=2, choices=Status)
+# 	price = models.CharField(max_length=15)
+# 	services = models.CharField(max_length=15)
+	
+
+
+
+
+
 
 
