@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'sweetify',
     'phonenumber_field',
     'django_tables2',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 LOGIN_REDIRECT_URL = 'home-view'
+IMPORT_EXPORT_USE_TRANSACTION = True

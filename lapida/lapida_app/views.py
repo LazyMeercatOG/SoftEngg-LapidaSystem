@@ -7,7 +7,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
 from .decorators import unathenticated_user, allowed_users
 from django.contrib.auth.models import Group
-from .models import User_Place, MasterData
+from .models import User_Place, MasterData_Revised
+from .resources import MasterData_RevisedResource
+
 
 @login_required(login_url='login')
 #@allowed_users(allowed_roles=['admin'])
@@ -73,10 +75,11 @@ def register(request):
 def create_dead(request):
 	if request.method == "POST":
 		form = User_PlaceForm(request.POST)
-		form.category = request.POST.get('category')
+		uid = request.POST.get('uid')
 		if form.is_valid():
 			dead = form.save(commit=False)
 			dead.user = request.user
+			dead.uid = MasterData_Revised.objects.get(uid=uid)
 			dead.save()
 			return redirect('profile')
 	else:
@@ -86,8 +89,24 @@ def create_dead(request):
 
 def profile(request):
 	query_results = User_Place.objects.filter(user=request.user)
-	context = {'form':query_results}
+	dead_profile = []
+	for dead in query_results:
+		dead_profile.append(MasterData_Revised.objects.get(uid=dead))
+	context = {'form':dead_profile}
 	return render(request, 'lapida_app/profile.html',context)
+
+def export(request):
+    member_resource = MasterData_RevisedResource()
+    dataset = member_resource.export()
+    #response = HttpResponse(dataset.csv, content_type='text/csv')
+    #response['Content-Disposition'] = 'attachment; filename="member.csv"'
+    #response = HttpResponse(dataset.json, content_type='application/json')
+    #response['Content-Disposition'] = 'attachment; filename="persons.json"'
+    response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="persons.xls"'
+    return response
+
+
 
 
 # Create your views here.

@@ -20,8 +20,9 @@ class Profile(models.Model):
 	def __str__(self):
 		return f'{self.user.username} Profile'
 
-class MasterData(models.Model):
-	uid = models.CharField(primary_key=True,max_length=50)
+
+class MasterData_Revised(models.Model):
+	uid = models.CharField(max_length=50, unique=True)
 	place = models.CharField(max_length=60)
 	last_name = models.CharField(max_length=60)
 	first_name = models.CharField(max_length=60)
@@ -36,15 +37,8 @@ class MasterData(models.Model):
 
 class User_Place(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	uid = models.ForeignKey(MasterData,on_delete=models.CASCADE)
-	last_name = models.CharField(max_length=60)
-	first_name = models.CharField(max_length=60)
-	middle_name = models.CharField(max_length=60)
-	category = models.CharField(max_length=2, choices=STORAGE_CHOICES) 
-	blk = models.CharField(max_length=3)
-	street = models.CharField(max_length=12)
-	lot = models.CharField(max_length=3)
+	uid = models.ForeignKey(MasterData_Revised,to_field="uid", db_column="uid" ,on_delete=models.CASCADE)
 	def __str__(self):
-		return f'{self.last_name}{self.first_name}{self.middle_name}'
+		return f'{self.uid}'
 
 

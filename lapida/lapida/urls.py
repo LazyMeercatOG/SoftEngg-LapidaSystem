@@ -18,9 +18,8 @@ from django.urls import path
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-admin.autodiscover()
-
+from django.conf.urls import url
+admin.autodiscover() 
 urlpatterns = [
 	path('', include('lapida_app.urls')),
-    path('admin/', admin.site.urls),
 ]
