@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
 from phonenumber_field.formfields import PhoneNumberField
-from .models import Profile, User_Place, MasterData_Revised
+from .models import Profile, User_Place, MasterData_Revised, Order_User
 
 
 class CreateUserForm(UserCreationForm):
@@ -48,7 +48,13 @@ class User_PlaceForm(forms.ModelForm):
 		# 	   raise forms.ValidationError('The UID you inputted was not found in our database')
 		# 	return uid
 
-
+# class Order_UserForm(forms.ModelForm):
+# 	class Meta:
+# 		model =  Order_User
+# 		fields = ['profile_dead']
+# 		    def __init__(self, *args, **kwargs):
+# 		        super().__init__(*args, **kwargs)
+# 		        self.fields['profile_dead'].queryset = Order_User.objects.none()
 
 
 

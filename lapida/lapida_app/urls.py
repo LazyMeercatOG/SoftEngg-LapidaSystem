@@ -11,6 +11,8 @@ urlpatterns = [
   	path('logout/',views.logoutUser,name='logout'),
   	path('register_dead/',views.create_dead,name='create-dead'),
     path('profile/',views.profile,name='profile'),
+	path('dashboard/',views.dashboard,name='dashboard'),
+	path('menu/',views.menu,name='menu'),
     path('admin/', admin.site.urls),
     url(r'^export-exl/$', views.export, name='export'),
  	url(r'^export-csv/$', views.export, name='export'),

@@ -50,12 +50,13 @@ class User_Place(models.Model):
 		return f'{self.uid}'
 
 
-# class Order_User(models.Model):
-# 	profile_dead = models.ForeignKey(User_Place, on_delete=models.CASCADE)
-# 	status = models.CharField(max_length=2, choices=Status)
-# 	price = models.CharField(max_length=15)
-# 	services = models.CharField(max_length=15)
-	
+class Order_User(models.Model):
+	profile_dead = models.ForeignKey(User_Place, on_delete=models.CASCADE)
+	status = models.CharField(max_length=2, choices=Status)
+	price = models.CharField(max_length=15)
+	services = models.CharField(max_length=15)
+	ctime = models.DateTimeField(auto_now_add=True)
+	uptime = models.DateTimeField(auto_now=True)
 
 
 

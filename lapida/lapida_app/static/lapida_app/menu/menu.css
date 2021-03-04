@@ -1,0 +1,23 @@
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSE
+* ==========================================
+*
+*/
+
+.text-small {
+    font-size: 0.9rem !important;
+}
+
+body {
+    background: linear-gradient(to left, #41B3A3, #85DCB0);
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+#checkout{
+    display:none;
+}

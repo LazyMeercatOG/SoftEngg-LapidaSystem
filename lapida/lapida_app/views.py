@@ -93,11 +93,29 @@ def create_dead(request):
 	context = {'form':form}
 	return render(request, 'lapida_app/register_dead.html',context)
 
+def dashboard(request):
+	return render(request, 'lapida_app/dashboard.html')
+
+def menu(request):
+	query_results = User_Place.objects.filter(user=request.user)
+	dead_profile = []
+	for dead in query_results:
+		dead_profile.append(MasterData_Revised.objects.get(uid=dead))
+	if not dead_profile:
+		messages.error(request, 'Please register a profile of your loved one first.')
+		return redirect('create-dead')
+	context = {'form':dead_profile}
+	return render(request, 'lapida_app/menu.html',context)
+
+
 def profile(request):
 	query_results = User_Place.objects.filter(user=request.user)
 	dead_profile = []
 	for dead in query_results:
 		dead_profile.append(MasterData_Revised.objects.get(uid=dead))
+	if not dead_profile:
+		messages.error(request, 'Please register a profile of your loved one first.')
+		return redirect('create-dead')
 	context = {'form':dead_profile}
 	return render(request, 'lapida_app/profile.html',context)
 
