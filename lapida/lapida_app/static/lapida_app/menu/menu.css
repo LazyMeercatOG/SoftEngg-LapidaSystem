@@ -13,8 +13,8 @@
 body {
     min-height: 120vh;
     position: relative;
-    background: url("images/flower.jpg") no-repeat;
-    background-size: 1500px 3000px;
+    background: url("images/flower.jpg") no-repeat right center;
+    background-size: cover;
     backdrop-filter: blur(12px);
 }
 
