@@ -14,10 +14,17 @@ STORAGE_CHOICES=(
 
 Status=(
 ("P", "Pending"),
-("R", "Returned"),
+("Ca", "Cancelled"),
 ("C", "Completed"),
 ("Pa", "Paid"),
 ("O","Ongoing")
+)
+
+cemeteries=(
+("MN", "Manila North"),
+("MS", "Manila South"),
+("L", "La Loma"),
+("MC", "Manila Chinese"),
 )
 
 
@@ -28,6 +35,13 @@ class Profile(models.Model):
 	def __str__(self):
 		return f'{self.user.username} Profile'
 
+class CareTaker(models.Model):
+	user = models.OneToOneField(User,on_delete=models.CASCADE)
+	gender = models.CharField(max_length=1, choices=GENDER_CHOICES) 
+	phone = PhoneNumberField()
+	cemetery = models.CharField(max_length=2, choices=cemeteries)
+	def __str__(self):
+		return f'{self.user.username} Profile'
 
 class MasterData_Revised(models.Model):
 	uid = models.CharField(max_length=50, unique=True)
@@ -54,11 +68,14 @@ class Order_User(models.Model):
 	profile_dead = models.ForeignKey(User_Place, on_delete=models.CASCADE)
 	status = models.CharField(max_length=2, choices=Status)
 	price = models.CharField(max_length=15)
-	services = models.CharField(max_length=15)
+	services = models.CharField(max_length=150)
 	ctime = models.DateTimeField(auto_now_add=True)
 	uptime = models.DateTimeField(auto_now=True)
 
-
+class Caretaker_Task(models.Model):
+	caretaker = models.ForeignKey(CareTaker, on_delete=models.CASCADE)
+	order = models.ForeignKey(Order_User, on_delete=models.CASCADE)
+	
 
 
 

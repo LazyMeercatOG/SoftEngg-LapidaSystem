@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
 from .decorators import unathenticated_user, allowed_users
 from django.contrib.auth.models import Group
-from .models import User_Place, MasterData_Revised
+from .models import User_Place, MasterData_Revised, CareTaker, Order_User, Caretaker_Task
 from .resources import MasterData_RevisedResource
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -94,7 +94,14 @@ def create_dead(request):
 	return render(request, 'lapida_app/register_dead.html',context)
 
 def dashboard(request):
-	return render(request, 'lapida_app/dashboard.html')
+	caretaker_profile = CareTaker.objects.get(user=request.user)
+	caretaker_task = Caretaker_Task.objects.filter(caretaker=caretaker_profile)
+	tasks = []
+	for task in caretaker_task:
+		tasks.append(Order_User.objects.get(caretaker_task=task))
+	context = {'form':tasks}
+	return render(request, 'lapida_app/dashboard.html',context)	
+
 
 def menu(request):
 	query_results = User_Place.objects.filter(user=request.user)
@@ -118,6 +125,11 @@ def profile(request):
 		return redirect('create-dead')
 	context = {'form':dead_profile}
 	return render(request, 'lapida_app/profile.html',context)
+
+def summary(request, id):
+	order = Order_User.objects.get(id=id)
+	context = {'form':order}
+	return render(request, 'lapida_app/summary.html',context)
 
 def export(request):
     member_resource = MasterData_RevisedResource()
