@@ -11,7 +11,19 @@
 }
 
 body {
-    background: linear-gradient(to left, #41B3A3, #85DCB0);
+    min-height: 120vh;
+    position: relative;
+    background: url("images/flower.jpg") no-repeat;
+    background-size: 1500px 3000px;
+    backdrop-filter: blur(12px);
+}
+
+h1 {
+  text-shadow: 1px 1px 2px #000000;
+}
+
+h6 {
+  text-shadow: 0.5px 0.5px 1px #000000;
 }
 
 .cursor-pointer {
