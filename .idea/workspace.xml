@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1588a567-0048-444e-a6ff-457aeeb9cc05" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lapida/lapida_app/templates/lapida_app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/lapida/lapida_app/templates/lapida_app/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lapida/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/lapida/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lapida/lapida_app/templates/lapida_app/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/lapida/lapida_app/templates/lapida_app/menu.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,9 +23,12 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lapida/lapida_app/static/lapida_app/menu" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Allan\Desktop\Files\SoftEngg-LapidaSystem\lapida\lapida_app\static\lapida_app\menu" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Allan\Desktop\Files\SoftEngg-LapidaSystem\lapida\lapida_app\static\lapida_app\index\img\team" />
       <recent name="C:\Users\Allan\Desktop\Files\SoftEngg-LapidaSystem\lapida\lapida_app\static\lapida_app\menu\images" />
