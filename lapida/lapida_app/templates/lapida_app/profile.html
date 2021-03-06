@@ -50,6 +50,49 @@
       {%endif%}
     </td>
       <td>{{item.street}}, {{item.blk}} - {{item.lot}}</td>
+       <td> <a href="{%url 'delete' uid=item.uid%}"><button type="button" class="btn btn-danger">Delete</button> </td>
+    </tr>
+  </tbody>
+{%endfor%}
+</table>
+      </div>
+    </section>
+
+ <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+        <h2>User Transactions</h2>         <a href="{%url 'create-dead'%}" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-plus-sign"></span> Plus
+          </a>
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <section class="inner-page">
+      <div class="container">
+        <p>
+          User Transactions Table
+        </p>
+        <table class="table table-striped table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Status</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+   {%for order in order_user%}
+  <tbody>
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>
+      <a href="{%url 'summary' id=order.id%}" class="pull-left">
+      {{order.profile_dead.uid.last_name}}, {{order.profile_dead.uid.first_name}} {{order.profile_dead.uid.middle_name}}
+    </a>
+    </td>
+      <td>
+        {{order.get_status_display}}
+    </td>
+      <td>{{order.order_date|date:"D d M Y"}}</td>
     </tr>
   </tbody>
 {%endfor%}

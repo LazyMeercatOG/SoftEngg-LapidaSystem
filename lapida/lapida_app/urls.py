@@ -14,6 +14,7 @@ urlpatterns = [
   	path('dashboard/',views.dashboard,name='dashboard'),
   	path('menu/',views.menu,name='menu'),
     path('summary/<int:id>',views.summary,name='summary'),
+    path('delete/<slug:uid>',views.delete_record,name='delete'),
     path('admin/', admin.site.urls),
     url(r'^export-exl/$', views.export, name='export'),
  	  url(r'^export-csv/$', views.export, name='export'),

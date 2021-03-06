@@ -188,7 +188,13 @@ body {
 										<td>
 											<div class="media">
 												<a href="{%url 'summary' id=item.id%}" class="pull-left">
-													<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+														{%if item.status == "C"%}
+														<box-icon name='check-circle' type='solid' ></box-icon>
+														{%elif item.status == "P" or item.status == "O" or item.status == "Pa" %}
+														<box-icon name='time-five' type='solid' ></box-icon>
+														{%elif item.status == "Ca"%}
+														<box-icon type='solid' name='x-circle'></box-icon>
+														{%endif%}
 												</a>
 												<div class="media-body">
 													<span class="media-meta pull-right">{{item.ctime|date:"D d M Y"}}</span>

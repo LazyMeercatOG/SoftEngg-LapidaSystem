@@ -48,13 +48,17 @@ class User_PlaceForm(forms.ModelForm):
 		# 	   raise forms.ValidationError('The UID you inputted was not found in our database')
 		# 	return uid
 
-# class Order_UserForm(forms.ModelForm):
-# 	class Meta:
-# 		model =  Order_User
-# 		fields = ['profile_dead']
-# 		    def __init__(self, *args, **kwargs):
-# 		        super().__init__(*args, **kwargs)
-# 		        self.fields['profile_dead'].queryset = Order_User.objects.none()
+class DateInput(forms.DateInput):
+	input_type = 'date'
 
+
+class Order_UserForm(forms.ModelForm):
+	class Meta:
+		model =  Order_User
+		order_date = models.DateTimeField()
+		fields = ['order_date']
+		widgets = {
+			'order_date': DateInput()
+		}	
 
 

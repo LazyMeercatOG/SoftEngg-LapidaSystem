@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
+from datetime import datetime  
 
 GENDER_CHOICES = (
         ('M', 'Male'),
@@ -68,7 +69,9 @@ class Order_User(models.Model):
 	profile_dead = models.ForeignKey(User_Place, on_delete=models.CASCADE)
 	status = models.CharField(max_length=2, choices=Status)
 	price = models.CharField(max_length=15)
-	services = models.CharField(max_length=150)
+	services = models.CharField(max_length=200)
+	note = models.CharField(max_length=180)
+	order_date = models.DateTimeField(default=datetime.now,blank=True)
 	ctime = models.DateTimeField(auto_now_add=True)
 	uptime = models.DateTimeField(auto_now=True)
 

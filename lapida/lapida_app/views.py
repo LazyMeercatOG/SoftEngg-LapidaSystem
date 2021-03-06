@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm, ProfileForm, User_PlaceForm
+from .forms import CreateUserForm, ProfileForm, User_PlaceForm, Order_UserForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -78,10 +78,17 @@ def create_dead(request):
 	if request.method == "POST":
 		form = User_PlaceForm(request.POST)
 		uid = request.POST.get('uid')
+		dead_profile = []
+		query_results = User_Place.objects.filter(user=request.user)
+		for dead in query_results:
+			dead_profile.append(MasterData_Revised.objects.get(uid=dead))
 		try:
 			dead = MasterData_Revised.objects.get(uid=uid)
+			if dead in dead_profile:
+				messages.error(request, 'The UID you inputted is already registered to your account.')
+				return redirect('create-dead')
 		except ObjectDoesNotExist:
-			messages.error(request, 'The UID you inputted was not found in our database')
+			messages.error(request, 'The UID you inputted was not found in our database.')
 		if form.is_valid():
 			dead = form.save(commit=False)
 			dead.user = request.user
@@ -105,25 +112,101 @@ def dashboard(request):
 
 def menu(request):
 	query_results = User_Place.objects.filter(user=request.user)
+	form = Order_UserForm(request.POST)
 	dead_profile = []
 	for dead in query_results:
 		dead_profile.append(MasterData_Revised.objects.get(uid=dead))
 	if not dead_profile:
 		messages.error(request, 'Please register a profile of your loved one first.')
 		return redirect('create-dead')
-	context = {'form':dead_profile}
+	context = {'form':dead_profile, 'order':form}
+	if request.method == 'POST':
+		current_price = 0
+		options = []
+		uid = request.POST.get('uid')
+		instance = Order_User(profile_dead=User_Place.objects.get(uid=uid))
+		for x in range(6,10):
+			check = request.POST.get('customCheck'+ str(x))
+			if check:
+				if x == 7:
+					flower = request.POST.get('customRadio')
+					current_price = get_flower_price(flower,current_price)
+					options.append(get_flower(flower))
+				else:
+					options.append(get_options(x))
+					current_price = get_prices(x, current_price)
+		if form.is_valid():
+			order_date = form.cleaned_data.get("order_date")
+			instance.order_date = order_date
+			note = request.POST.get('Note')
+			options = '\n'.join(options)
+			instance.status = "P"
+			instance.price = current_price
+			instance.services = options
+			instance.note = note
+			instance.save()
 	return render(request, 'lapida_app/menu.html',context)
+
+def get_options(x):
+	if x == 6:
+		option = "Service includes grass-trimming, watering the entire site, and proper cleaning the gravestone. Photos of before and after proof of service will be sent to your email."
+	elif x == 8:
+		option =  "Placing of candle lights for the ones you love as an act of an extension for your prayers.Photos of before and after proof of service will be sent to your email."
+	elif x == 9:
+		option = "Haven's Memory will offer 'The Eternal Rest prayer' which is offered at any time during business hours for those who have departed in this life. "
+	return option
+
+def get_flower(flower):
+	if flower == "Wreath":
+		option = "Floral Arrangement: Wreath"
+	elif flower == "Classic":
+		option =  "Floral Arrangement: Classic"
+	elif flower == "Elegant":
+		option = "Floral Arrangement: Elegant"
+	return option
+
+def get_prices(x, current_price):
+	if x == 6:
+		price = 3000 + current_price
+	elif x == 8:
+		price = 500 + current_price
+	elif x == 9:
+		price = 1500 + current_price
+	return price
+
+def get_flower_price(flower, current_price):
+	if flower == "Wreath":
+		price = 3000 + current_price
+	elif flower == "Classic":
+		price = 4000 + current_price
+	elif flower == "Elegant":
+		price = 6600 + current_price
+	return price
+
+def delete_record(request,uid):
+	dead_profile = User_Place.objects.get(uid=uid)
+	dead_profile.delete()
+	return redirect('profile')
+
 
 
 def profile(request):
 	query_results = User_Place.objects.filter(user=request.user)
 	dead_profile = []
+	order_user = []
+	order_query = []
 	for dead in query_results:
 		dead_profile.append(MasterData_Revised.objects.get(uid=dead))
+		order_query += Order_User.objects.filter(profile_dead=dead)
+	for order in order_query:
+		try:
+			order_user.append(Order_User.objects.get(id=order.id))
+		except ObjectDoesNotExist:
+			pass
 	if not dead_profile:
 		messages.error(request, 'Please register a profile of your loved one first.')
 		return redirect('create-dead')
-	context = {'form':dead_profile}
+	context = {'form':dead_profile, 'order_user': order_user}
 	return render(request, 'lapida_app/profile.html',context)
 
 def summary(request, id):

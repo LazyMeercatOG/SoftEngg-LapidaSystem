@@ -30,12 +30,13 @@
                     <div class="card-body p-5">
                         <h2 class="h4 mb-1">Choose Beneficiary</h2>
                         <p class="small text-muted font-italic mb-4">Select a registered loved one.</p>
-                        {%for item in form%}
-                  <select class="form-select" aria-label="Default select example">
-                  <option selected>--------</option>
+                        <form method="POST" action="">
+                  <select class="form-select" name="uid" aria-label="Default select example" required>
+                  <option selected disabled value ="">Select a Loved One</option>
+                  {%for item in form%}
                   <option value="{{item.uid}}">{{item.last_name}}, {{item.first_name}} {{item.middle_name}}</option>
+                  {%endfor%}
                 </select>
-                {%endfor%}
                     </div>
                 </div>
 
@@ -43,10 +44,11 @@
                     <div class="card-body p-5">
                         <h2 class="h4 mb-1">Pick a Service</h2>
                         <p class="small text-muted font-italic mb-4">You can pick any number of services to avail.</p>
+                            {% csrf_token %}
                         <ul class="list-group mx-auto">
                             <li class="list-group-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" id="customCheck6" type="checkbox" name="customCheck">
+                                    <input class="custom-control-input" id="customCheck6" type="checkbox" name="customCheck6">
                                     <label class="cursor-pointer font-italic d-block custom-control-label" for="customCheck6"><p class="mb-0">Gravesite Care - ₱3000</p><span class="small font-italic text-muted">Removal of overgrowth and debris.
                                     Grass trimming, edging, weeding, and raking of leaves and dead plant matter. Also includes reconditioning of the tombstone.</span>
                                     </label>
@@ -55,7 +57,7 @@
                             </li>
                             <li class="list-group-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" id="customCheck7" type="checkbox" name="customCheck">
+                                    <input class="custom-control-input" id="customCheck7" type="checkbox" name="customCheck7">
                                     <label class="cursor-pointer font-italic d-block custom-control-label" for="customCheck7"><p class="mb-0">Floral Arrangements</p><span class="small font-italic text-muted">Placement of artificial flower arrangements. Includes standard bouquets & materials. Price varies.</span>
                                     </label>
                                  <label for="customCheck7"><img src="https://images-ext-1.discordapp.net/external/dbeLxEtcPs2Kf_VsEaTtBWMpJayuX2cttqSNtWMSVKc/https/asset.bloomnation.com/c_pad%2Cd_vendor%3Aglobal%3Acatalog%3Aproduct%3Aimage.png%2Cf_auto%2Cfl_preserve_transparency%2Cq_auto/v1605627801/vendor/6548/catalog/product/2/0/20181123113031_file_5bf88d973d7d6.jpg?width=697&height=675" alt="" width="180"></label>
@@ -63,7 +65,7 @@
                             </li>
                             <li class="list-group-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" id="customCheck8" type="checkbox" name="customCheck">
+                                    <input class="custom-control-input" id="customCheck8" type="checkbox" name="customCheck8">
                                     <label class="cursor-pointer font-italic d-block custom-control-label" for="customCheck8"><p class="mb-0">Candle Lights - ₱500</p><span class="small font-italic text-muted">Light candles to your loved one for their guidance.</span>
                                     </label>
                                  <label for="customCheck8"><img src="https://media.discordapp.net/attachments/802135528907472896/816961878198321162/candle.jpg" alt="" width="180"></label>
@@ -71,7 +73,7 @@
                             </li>
                             <li class="list-group-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" id="customCheck9" type="checkbox" name="customCheck">
+                                    <input class="custom-control-input" id="customCheck9" type="checkbox" name="customCheck9">
                                     <label class="cursor-pointer font-italic d-block custom-control-label" for="customCheck9"><p class="mb-0">Prayer Service - ₱1500</p><span class="small font-italic text-muted">This service provides a personal prayer for your loved one to put their souls at ease and to send a heartfelt message.</span>
                                     </label>
                                  <label for="customCheck9"><img src="https://images-ext-2.discordapp.net/external/oYdLkG__5-hmxH163zsWx_ORBdxfqhkljQq9ctj0qFI/https/c0.wallpaperflare.com/preview/387/197/237/people-bible-hand-hands.jpg" alt="" width="180"></label>
@@ -88,7 +90,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item rounded-0 d-flex align-items-center justify-content-between">
                                     <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" id="customRadio1" type="radio" name="customRadio" checked>
+                                        <input class="custom-control-input" id="customRadio1" type="radio" name="customRadio" value="Wreath" checked>
                                         <label class="custom-control-label" for="customRadio1">
                                             <p class="mb-0">Wreath - ₱3000</p><span class="small font-italic text-muted">Simple wreath arrangement composed of fragrant white cauliflowers</span>
                                         </label>
@@ -97,7 +99,7 @@
                                 </li>
                                 <li class="list-group-item d-flex align-items-center justify-content-between">
                                     <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" id="customRadio2" type="radio" name="customRadio">
+                                        <input class="custom-control-input" id="customRadio2" type="radio" name="customRadio" value="Classic">
                                         <label class="custom-control-label" for="customRadio2">
                                             <p class="mb-0">Classic - ₱4000</p><span class="small font-italic text-muted">A bouquet of well-kept daisies, arranged with care</span>
                                         </label>
@@ -106,7 +108,7 @@
                                 </li>
                                 <li class="list-group-item d-flex align-items-center justify-content-between">
                                     <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" id="customRadio3" type="radio" name="customRadio">
+                                        <input class="custom-control-input" id="customRadio3" type="radio" name="customRadio" value ="Elegant">
                                         <label class="custom-control-label" for="customRadio3">
                                             <p class="mb-0">Elegant - ₱6600</p><span class="small font-italic text-muted">An extravagant assortment of flowers, to show your loved one that extra appreciation</span>
                                         </label>
@@ -124,6 +126,7 @@
                             <h2 class="h4 mb-1">Select the Date of Service</h2>
                             <p class="small text-muted font-italic mb-4">Please choose the date on when to avail the selected service/s.</p>
                             <input id="datepicker" width="276" onkeydown="return false"/>
+                            {{order.order_date}}
                         </div>
                     </div>
                 </div>
@@ -133,7 +136,7 @@
                         <div class="card-body p-5">
                             <h2 class="h4 mb-1">Additional Notes</h2>
                             <p class="small text-muted font-italic mb-4">Write out specific instructions or additional messages to the caretaker in charge of the service/s. (Optional)</p>
-                            <textarea class="form-control" id="textarea" rows="3"></textarea>
+                            <textarea class="form-control" name="Note" id="textarea" rows="3"></textarea>
                         </div>
                     </div>
                 </div>
@@ -176,9 +179,8 @@
                     </div>
                 </li>
               </ul>
-
-              <button type="button" class="btn btn-primary btn-block">Proceed to Checkout</button>
-
+              <button type="Submit" class="btn btn-primary btn-block">Proceed to Checkout</button>
+              </form>
             </div>
           </div>
     </div>
