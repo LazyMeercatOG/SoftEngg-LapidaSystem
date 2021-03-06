@@ -146,15 +146,34 @@
               <h2 class="h4 mb-1">Payment Summary</h2>
 
               <ul class="list-group list-group-flush">
-                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                  Temporary amount
-                  <span>$25.98</span>
-                </li>
+                  <div id="temp-1">
+                    <li class='list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0'>Gravesite Care<span>₱3000.00</span></li>
+                  </div>
+                  <div id="temp-2">
+                    <li class='list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0'>Floral Arrangements</li>
+                  </div>
+                  <div id="temp-a">
+                    <li class='list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 tab'>Wreath<span>₱3000.00</span></li>
+                  </div>
+                  <div id="temp-b">
+                    <li class='list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 tab'>Classic<span>₱4000.00</span></li>
+                  </div>
+                  <div id="temp-c">
+                    <li class='list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 tab'>Elegant<span>₱6600.00</span></li>
+                  </div>
+                  <div id="temp-3">
+                    <li class='list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0'>Candle Lights<span>₱500.00</span></li>
+                  </div>
+                  <div id="temp-4">
+                    <li class='list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0'>Prayer Service<span>₱1500.00</span></li>
+                  </div>
                 <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                   <div>
                     <strong>Total amount</strong>
                   </div>
-                  <span><strong>$53.98</strong></span>
+                    <div class="totalpay" id="totalpay">
+
+                    </div>
                 </li>
               </ul>
 
@@ -174,13 +193,19 @@
     <script src="{% static 'lapida_app/menu/js/gijgo.min.js' %}" charset="utf-8"></script>
 
     <script type="text/javascript">
+
 $(document).ready(function(){
 
 $('#datepicker').datepicker();
+var finalpay = 0;
+var prevrad = 1;
+
+// Checkbox interactions
 
 $('#flowercard').hide();
 $('#datepickercard').hide();
 $('#notecard').hide();
+$('#temp-1, #temp-2, #temp-a, #temp-b, #temp-c, #temp-3, #temp-4').hide();
 
 $('#customCheck6, #customCheck8, #customCheck9').change(function(){
 if($('#customCheck6, #customCheck7, #customCheck8, #customCheck9').is(':checked')){
@@ -211,6 +236,167 @@ $('#notecard').fadeOut('slow');
 $('#checkout').fadeOut('slow');
 }
 });
+
+// Dynamic Payment Display Behavior
+
+
+$('#customCheck6').change(function(){
+    if($('#customCheck6').is(':checked')){
+        finalpay = finalpay + 3000;
+        $('#temp-1').fadeIn('slow');
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+    else{
+        finalpay = finalpay - 3000;
+        $('#temp-1').fadeOut('slow');
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+});
+
+$('#customCheck7').change(function(){
+    if($('#customCheck7').is(':checked')){
+        if($('#customRadio1').is(':checked')){
+            finalpay = finalpay + 3000;
+            $('#temp-2').fadeIn('slow');
+            $('#temp-a').fadeIn('slow');
+            $("#totalpay").empty();
+            $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        }
+        else if($('#customRadio2').is(':checked')){
+            finalpay = finalpay + 4000;
+            $('#temp-2').fadeIn('slow');
+            $('#temp-b').fadeIn('slow');
+            $("#totalpay").empty();
+            $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        }
+        else if($('#customRadio3').is(':checked')){
+            finalpay = finalpay + 6600;
+            $('#temp-2').fadeIn('slow');
+            $('#temp-c').fadeIn('slow');
+            $("#totalpay").empty();
+            $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        }
+    }
+    else{
+        if($('#customRadio1').is(':checked')){
+            finalpay = finalpay - 3000;
+            $('#temp-2').fadeOut('slow');
+            $('#temp-a').fadeOut('slow');
+            $("#totalpay").empty();
+            $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        }
+        else if($('#customRadio2').is(':checked')){
+            finalpay = finalpay - 4000;
+            $('#temp-2').fadeOut('slow');
+            $('#temp-b').fadeOut('slow');
+            $("#totalpay").empty();
+            $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        }
+        else if($('#customRadio3').is(':checked')){
+            finalpay = finalpay - 6600;
+            $('#temp-2').fadeOut('slow');
+            $('#temp-c').fadeOut('slow');
+            $("#totalpay").empty();
+            $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        }
+    }
+});
+
+$('#customCheck8').change(function(){
+    if($('#customCheck8').is(':checked')){
+        finalpay = finalpay + 500;
+        $('#temp-3').fadeIn('slow');
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+    else{
+        finalpay = finalpay - 500;
+        $('#temp-3').fadeOut('slow');
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+});
+
+$('#customCheck9').change(function(){
+    if($('#customCheck9').is(':checked')){
+        finalpay = finalpay + 1500;
+        $('#temp-4').fadeIn('slow');
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+    else{
+        finalpay = finalpay - 1500;
+        $('#temp-4').fadeOut('slow');
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+});
+
+$('#customRadio1').change(function(){
+    if($('#customRadio1').is(':checked')){
+        if(prevrad == 2)
+            finalpay = finalpay - 4000;
+        else if(prevrad == 3)
+            finalpay = finalpay - 6600;
+         finalpay = finalpay + 3000;
+        $('#temp-a').fadeIn('slow');
+        $('#temp-b').fadeOut('slow');
+        $('#temp-c').fadeOut('slow');
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        prevrad = 1;
+    }
+    else{
+        $('#temp-a').fadeOut('slow');
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+});
+
+$('#customRadio2').change(function(){
+    if($('#customRadio2').is(':checked')){
+        if(prevrad == 1)
+            finalpay = finalpay - 3000;
+        else if(prevrad == 3)
+            finalpay = finalpay - 6600;
+        finalpay = finalpay + 4000;
+        $('#temp-b').fadeIn('slow');
+        $('#temp-a').fadeOut('slow');
+        $('#temp-c').fadeOut('slow');
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        prevrad = 2;
+    }
+    else{
+        $('#temp-b').fadeOut('slow');
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+});
+
+$('#customRadio3').change(function(){
+    if($('#customRadio3').is(':checked')){
+        if(prevrad == 1)
+            finalpay = finalpay - 3000;
+        else if(prevrad == 2)
+            finalpay = finalpay - 4000;
+        finalpay = finalpay + 6600;
+        $('#temp-c').fadeIn('slow');
+        $('#temp-a').fadeOut('slow');
+        $('#temp-b').fadeOut('slow');
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        prevrad = 3;
+    }
+    else{
+        $('#temp-c').fadeOut('slow');
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+});
+
 
 });
     </script>

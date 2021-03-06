@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1588a567-0048-444e-a6ff-457aeeb9cc05" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lapida/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/lapida/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lapida/lapida_app/static/lapida_app/menu/menu.css" beforeDir="false" afterPath="$PROJECT_DIR$/lapida/lapida_app/static/lapida_app/menu/menu.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lapida/lapida_app/templates/lapida_app/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/lapida/lapida_app/templates/lapida_app/menu.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +24,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lapida/lapida_app/static/lapida_app/menu" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -45,5 +46,16 @@
       <updated>1614664627660</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

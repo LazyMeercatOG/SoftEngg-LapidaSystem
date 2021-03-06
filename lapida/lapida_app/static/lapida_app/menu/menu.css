@@ -5,6 +5,9 @@
 * ==========================================
 *
 */
+.tab {
+    margin-left: 40px;
+}
 
 .text-small {
     font-size: 0.9rem !important;
