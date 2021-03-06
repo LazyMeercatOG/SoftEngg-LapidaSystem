@@ -214,6 +214,15 @@ def summary(request, id):
 	context = {'form':order}
 	return render(request, 'lapida_app/summary.html',context)
 
+
+def approve_payment(request,id):
+	order = Order_User.objects.get(id=id)
+	print(order)
+	order.status = "Pa"
+	order.save()
+	context = {'form':order}
+	return render(request,'lapida_app/summary',context)
+
 def export(request):
     member_resource = MasterData_RevisedResource()
     dataset = member_resource.export()

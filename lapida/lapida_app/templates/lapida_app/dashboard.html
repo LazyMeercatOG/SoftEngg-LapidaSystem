@@ -188,13 +188,7 @@ body {
 										<td>
 											<div class="media">
 												<a href="{%url 'summary' id=item.id%}" class="pull-left">
-														{%if item.status == "C"%}
-														<box-icon name='check-circle' type='solid' ></box-icon>
-														{%elif item.status == "P" or item.status == "O" or item.status == "Pa" %}
-														<box-icon name='time-five' type='solid' ></box-icon>
-														{%elif item.status == "Ca"%}
-														<box-icon type='solid' name='x-circle'></box-icon>
-														{%endif%}
+													<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABk0lEQVRIS72VjTEEYRBE32UgA0SACJABESACRIIIEAEiQATIgAxkQD31zdXs3P6cKmeqtup2d657ume+2RkrjtmK8VmG4BjYBbbbZU2v7boHHsaKHCM4AC6AjQmV78A5INlCDBFcAqct+wPw/qlV7WPV7AFnwHrLM0eiTvQRZHD/4P1YSKJS46qRzvMrgbbctbc7qeKpWVDRS0s6zHZVAv1Ucq18DfgsLPVZKBFjM3IzgdNyDeh5buwNsAXsJxLBH5vCk0QcBc5VZAKBjkr1AtlcCRxNSQzBteWtNTvUhYpbwII750AAgar3lSSmqILHc3shljgdgq9WXd9kZRLT+sDDqQ5OBpsiCFsECrtq4303SDBmUfZckNyTTBLjqkJ/dywaanJtqP+rjV+qyXHIOnMMSByrIYCiJ6r+mZYWo2Nqzl8ctM45+vdVoYq87Dw4LrCx+NWyC6BMom3eP5d17UdI8FgrC5u0TlGt0qYLHPt+SIWeS/SrD04Gk8jLSXL+4yQ7QYL2AgfAMt/kiRaMv145wTf/zHIZHEvSKQAAAABJRU5ErkJggg=="/>
 												</a>
 												<div class="media-body">
 													<span class="media-meta pull-right">{{item.ctime|date:"D d M Y"}}</span>

@@ -21,12 +21,8 @@
             </div><!-- / project-info-box -->
 
             <div class="project-info-box mt-0 mb-0">
-                <p class="mb-0">
-                    <span class="fw-bold mr-10 va-middle hide-mobile">Share:</span>
-                    <a href="#x" class="btn btn-xs btn-facebook btn-circle btn-icon mr-5 mb-0"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#x" class="btn btn-xs btn-twitter btn-circle btn-icon mr-5 mb-0"><i class="fab fa-twitter"></i></a>
-                    <a href="#x" class="btn btn-xs btn-pinterest btn-circle btn-icon mr-5 mb-0"><i class="fab fa-pinterest"></i></a>
-                    <a href="#x" class="btn btn-xs btn-linkedin btn-circle btn-icon mr-5 mb-0"><i class="fab fa-linkedin-in"></i></a>
+    <!-- Set up a container element for the button -->
+    <div id="paypal-button-container"></div>
                 </p>
             </div><!-- / project-info-box -->
         </div><!-- / column -->
@@ -40,4 +36,35 @@
         </div><!-- / column -->
     </div>
 </div>
+ <!-- Include the PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AZ99n5v8uTUjhoGvST_V46LKtl5yCCtEAubC2ReOKeWVjkSkd1SYrHda3RRlUbODi4q7CBivVyBV2Rso&currency=PHP"></script>
+
+    <script>
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: {{form.price}}
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Show a success message to the buyer
+                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                     $.get( "{% url 'approvepayment' id=form.id%}", function( data ) { 
+                }); 
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+    </script>
 {%endblock%}
