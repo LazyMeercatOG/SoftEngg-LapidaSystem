@@ -3,6 +3,9 @@ from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 from . import views
 from django.contrib import admin
+from django.conf.urls import handler404
+handler404 = views.handle404
+
 
 urlpatterns = [
     path('', views.index, name='home-view'),
@@ -16,6 +19,7 @@ urlpatterns = [
     path('summary/<int:id>',views.summary,name='summary'),
     path('success/<int:id>',views.approve_payment,name='approvepayment'),
     path('delete/<slug:uid>',views.delete_record,name='delete'),
+    path('403/',views.no_permission,name="404"),
     path('admin/', admin.site.urls),
     url(r'^export-exl/$', views.export, name='export'),
  	  url(r'^export-csv/$', views.export, name='export'),

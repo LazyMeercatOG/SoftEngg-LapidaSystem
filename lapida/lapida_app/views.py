@@ -14,8 +14,11 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 @login_required(login_url='login')
-#@allowed_users(allowed_roles=['admin'])
+@allowed_users(allowed_roles=['customer','caretaker','admin'])
 def index(request):
+	group = request.user.groups.all()[0].name
+	if 'caretaker' in group:
+		return redirect('dashboard')
 	return render(request, 'lapida_app/index.html')
 
 @unathenticated_user
@@ -74,6 +77,7 @@ def register(request):
 		context = {'form':form,'form_1':form_1}
 		return render(request, 'lapida_app/register.html',context)
 
+@login_required(login_url='login')
 def create_dead(request):
 	if request.method == "POST":
 		form = User_PlaceForm(request.POST)
@@ -100,6 +104,8 @@ def create_dead(request):
 	context = {'form':form}
 	return render(request, 'lapida_app/register_dead.html',context)
 
+@allowed_users(allowed_roles=['caretaker'])
+@login_required(login_url='login')
 def dashboard(request):
 	caretaker_profile = CareTaker.objects.get(user=request.user)
 	caretaker_task = Caretaker_Task.objects.filter(caretaker=caretaker_profile)
@@ -109,7 +115,7 @@ def dashboard(request):
 	context = {'form':tasks}
 	return render(request, 'lapida_app/dashboard.html',context)	
 
-
+@login_required(login_url='login')
 def menu(request):
 	query_results = User_Place.objects.filter(user=request.user)
 	form = Order_UserForm(request.POST)
@@ -145,6 +151,7 @@ def menu(request):
 			instance.services = options
 			instance.note = note
 			instance.save()
+			return redirect('summary',instance.id)
 	return render(request, 'lapida_app/menu.html',context)
 
 def get_options(x):
@@ -183,13 +190,13 @@ def get_flower_price(flower, current_price):
 		price = 6600 + current_price
 	return price
 
+@login_required(login_url='login')
 def delete_record(request,uid):
 	dead_profile = User_Place.objects.get(uid=uid)
 	dead_profile.delete()
 	return redirect('profile')
 
-
-
+@login_required(login_url='login')
 def profile(request):
 	query_results = User_Place.objects.filter(user=request.user)
 	dead_profile = []
@@ -209,19 +216,24 @@ def profile(request):
 	context = {'form':dead_profile, 'order_user': order_user}
 	return render(request, 'lapida_app/profile.html',context)
 
+
+@login_required(login_url='login')
 def summary(request, id):
 	order = Order_User.objects.get(id=id)
 	context = {'form':order}
 	return render(request, 'lapida_app/summary.html',context)
 
-
+@login_required(login_url='login')
 def approve_payment(request,id):
 	order = Order_User.objects.get(id=id)
 	print(order)
 	order.status = "Pa"
 	order.save()
 	context = {'form':order}
-	return render(request,'lapida_app/summary',context)
+	return render(request,'lapida_app/summary.html',context)
+
+def no_permission(request):
+	return render(request,'lapida_app/no_permission.html')
 
 def export(request):
     member_resource = MasterData_RevisedResource()
@@ -234,6 +246,8 @@ def export(request):
     response['Content-Disposition'] = 'attachment; filename="persons.xls"'
     return response
 
+def handle404(request, exception):
+	return render(request, 'lapida_app/404.html', status=404)
 
 
 

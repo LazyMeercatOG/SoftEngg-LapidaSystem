@@ -7,8 +7,8 @@
     <div class="row">
         <div class="col-md-5">
             <div class="project-info-box mt-0">
-                <h5>PROJECT DETAILS</h5>
-                <p class="mb-0">Vivamus pellentesque, felis in aliquam ullamcorper, lorem tortor porttitor erat, hendrerit porta nunc tellus eu lectus. Ut vel imperdiet est. Pellentesque condimentum, dui et blandit laoreet, quam nisi tincidunt tortor.</p>
+                <h5>REQUEST DETAILS</h5>
+                <p class="mb-0">{{form.services}}</p>
             </div><!-- / project-info-box -->
 
             <div class="project-info-box">
@@ -17,16 +17,18 @@
                 <p><b>Name of the Deceased:</b> {{form.profile_dead.uid.last_name}}, {{form.profile_dead.uid.first_name}} {{form.profile_dead.uid.middle_name}}</p>
                 <p><b>Location:</b> {{form.profile_dead.uid.place}} - {{form.profile_dead.uid.street}} {{form.profile_dead.uid.blk}} {{form.profile_dead.uid.lot}}</p>
                 <p class="mb-0"><b>Status:</b> {{form.get_status_display}}</p>
-                
             </div><!-- / project-info-box -->
-
+            {%if form.status == "P" %}
             <div class="project-info-box mt-0 mb-0">
     <!-- Set up a container element for the button -->
     <div id="paypal-button-container"></div>
                 </p>
             </div><!-- / project-info-box -->
+            {%else%}
+            <div class="project-info-box mt-0 mb-0">
+            </div><!-- / project-info-box -->
+  {%endif%}
         </div><!-- / column -->
-
         <div class="col-md-7">
             <img src="https://via.placeholder.com/400x300/FFB6C1/000000" alt="project-image" class="rounded">
             <div class="project-info-box">
