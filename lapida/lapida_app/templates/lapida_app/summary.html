@@ -19,6 +19,9 @@
                 <p><b>Name of the Deceased:</b> {{form.profile_dead.uid.last_name}}, {{form.profile_dead.uid.first_name}} {{form.profile_dead.uid.middle_name}}</p>
                 <p><b>Location:</b> {{form.profile_dead.uid.place}} - {{form.profile_dead.uid.street}} {{form.profile_dead.uid.blk}} {{form.profile_dead.uid.lot}}</p>
                 <p class="mb-0"><b>Status:</b> {{form.get_status_display}}</p>
+                {%if form.note%}
+                <p class="mb-0"><b>Note:</b> {{form.note}}</p>
+                {%endif%}
             </div><!-- / project-info-box -->
             {%if form.status == "P" %}
             <div class="project-info-box mt-0 mb-0">
@@ -66,6 +69,9 @@
                 <p><b>Name of the Deceased:</b> {{form.profile_dead.uid.last_name}}, {{form.profile_dead.uid.first_name}} {{form.profile_dead.uid.middle_name}}</p>
                 <p><b>Location:</b> {{form.profile_dead.uid.place}} - {{form.profile_dead.uid.street}} {{form.profile_dead.uid.blk}} {{form.profile_dead.uid.lot}}</p>
                 <p class="mb-0"><b>Status:</b> {{form.get_status_display}}</p>
+                {%if form.note%}
+                <p class="mb-0"><b>Note:</b> {{form.note}}</p>
+                {%endif%}
             </div><!-- / project-info-box -->
             <div class="col-md-13">
                         

@@ -117,7 +117,6 @@ $(function() {
             var usersid =  $(this).attr("uid");
             var url = "{% url 'delete' uid=1 %}".replace('1', usersid);
             console.log(usersid);
-
       Swal.fire({
       title: "Are you sure?",
       text: "Your profile will be deleted.",
@@ -144,6 +143,58 @@ $(function() {
       
 });
 </script>
+
+<script>
+$(function() {
+    $('.aaf').click(function (e) {
+      e.preventDefault();
+      var tthis = $(this);
+      var usersid =  $(this).attr("uid");
+      var url = "{% url 'delete' uid=1 %}".replace('1', usersid);
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        ).then(function(){ 
+    $.get( url, function( data ) { 
+  });
+   location.href = '{%url 'profile'%}'
+   });
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        )
+      }
+    })
+     
+      
+});
+});
+
+</script>
+
 {%endblock%}
 </body>
 

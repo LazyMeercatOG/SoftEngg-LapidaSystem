@@ -13,12 +13,11 @@ from django.core.exceptions import ObjectDoesNotExist
 import sweetify
 
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['customer','caretaker','admin'])
 def index(request):
-	group = request.user.groups.all()[0].name
-	if 'caretaker' in group:
-		return redirect('dashboard')
+	if request.user.is_authenticated:
+		group = request.user.groups.all()[0].name
+		if 'caretaker' in group:
+			return redirect('dashboard')
 	return render(request, 'lapida_app/index.html')
 
 @unathenticated_user
@@ -215,8 +214,6 @@ def get_flower_price(flower, current_price):
 def delete_record(request,uid):
 	dead_profile = User_Place.objects.get(user=request.user,uid=uid)
 	dead_profile.delete()
-	sweetify.success(request, 'You did it', text='Profile has been deleted',persistent='Hell yeah')
-	return redirect('profile')
 
 @login_required(login_url='login')
 def profile(request):
