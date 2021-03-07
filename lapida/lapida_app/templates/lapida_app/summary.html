@@ -1,8 +1,10 @@
 {% extends "lapida_app/base.html" %}
 {% load static %}
 {% block content  %}
+{% load auth_extras %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
 <link href="{% static 'lapida_app/summary/summary.css'%}" rel="stylesheet">
+{% if request.user|has_group:"customer" %} 
 <div class="container">
     <div class="row">
         <div class="col-md-5">
@@ -29,12 +31,54 @@
             </div><!-- / project-info-box -->
   {%endif%}
 
+        </div>
+
+
+
+        {%if form.image.url != "/media/image/upload_default.png"%}
+        <!-- / column -->
+        <div class="col-md-7">
+            <div class="project-info-box">
+                <p>Proof of Service Preview:</p>
+                <img src="{{form.image.url}}" id="display-img" style="width:650px;height:500px">
+            </div>
+            <div class="project-info-box">
+                <p><b>Latest Time Updated:</b> {{form.uptime}}</p>
+                <p><b>Skills:</b> Illustrator</p>
+            </div><!-- / project-info-box -->
+        </div><!-- / column -->
+        {%endif%}
+
+    </div>
+</div>
+{% elif request.user|has_group:"caretaker" %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="project-info-box">
+                <h5>REQUEST DETAILS</h5>
+                <p class="mb-0">{{form.services}}</p>
+            </div><!-- / project-info-box -->
+
+            <div class="project-info-box">
+                <p><b>Client:</b> {{form.profile_dead.user}}</p>
+                <p><b>Scheduled Date:</b> {{form.order_date|date:"D d M Y"}}</p>
+                <p><b>Name of the Deceased:</b> {{form.profile_dead.uid.last_name}}, {{form.profile_dead.uid.first_name}} {{form.profile_dead.uid.middle_name}}</p>
+                <p><b>Location:</b> {{form.profile_dead.uid.place}} - {{form.profile_dead.uid.street}} {{form.profile_dead.uid.blk}} {{form.profile_dead.uid.lot}}</p>
+                <p class="mb-0"><b>Status:</b> {{form.get_status_display}}</p>
+            </div><!-- / project-info-box -->
             <div class="col-md-13">
+                        
                         <div class="project-info-box">
+                            <form action="{%url 'update-picture' id=form.id%}" method ="POST" enctype="multipart/form-data">
+                            {%csrf_token%}
                             <label class="form-label" for="customFile">Upload the proof of service here:</label>
-                            <input type="file" class="form-control" style="margin-bottom:7px" id="customFile" accept="image/* "/>
-                            <button type="button" class="btn btn-primary btn-lg" style="margin-bottom:5px">Update Transaction</button>
+                            <input type="file" name="image" class="form-control" style="margin-bottom:7px" id="customFile" accept="image/* "/>
+                            <button type="submit" class="btn btn-primary btn-lg" onclick="return confirm('Are you sure you want to update the picture?');"style="margin-bottom:5px">Update Transaction</button>
+                        </form>
+                            {%if form.status == "Pa" %}
                             <button type="button" class="btn btn-success btn-lg">Confirm Transaction</button>
+                            {%endif%}
                             </div>
                     </div>
 
@@ -47,10 +91,10 @@
         <div class="col-md-7">
             <div class="project-info-box">
                 <p>Proof of Service Preview:</p>
-                <img src="https://lh3.googleusercontent.com/proxy/_Jy2jmk_6yg-xlrRhK_-j7_ES8uPt6M9Gepb9M5xci_oATnZX9eY_rz42Ge-YmVKcU87yqj6MrBFCxC0Ay1hcXBZ3twUqhG9qahdTkwAKg" alt="project-image" class="rounded" id="display-img" style="width:650px;height:500px">
+                <img src="{{form.image.url}}" class="rounded" id="display-img" style="width:650px;height:500px">
             </div>
             <div class="project-info-box">
-                <p><b>Categories:</b> Design, Illustration</p>
+                <p><b>Latest Time Updated:</b> {{form.uptime}}</p>
                 <p><b>Skills:</b> Illustrator</p>
             </div><!-- / project-info-box -->
         </div><!-- / column -->
@@ -58,6 +102,8 @@
 
     </div>
 </div>
+
+{%endif%} 
  <!-- Include the PayPal JavaScript SDK -->
     <script src="https://www.paypal.com/sdk/js?client-id=AZ99n5v8uTUjhoGvST_V46LKtl5yCCtEAubC2ReOKeWVjkSkd1SYrHda3RRlUbODi4q7CBivVyBV2Rso&currency=PHP"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

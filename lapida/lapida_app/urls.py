@@ -17,6 +17,7 @@ urlpatterns = [
   	path('dashboard/',views.dashboard,name='dashboard'),
   	path('menu/',views.menu,name='menu'),
     path('summary/<int:id>',views.summary,name='summary'),
+    path('update_picture/<int:id>',views.update_picture,name='update-picture'),
     path('success/<int:id>',views.approve_payment,name='approvepayment'),
     path('delete/<slug:uid>',views.delete_record,name='delete'),
     path('403/',views.no_permission,name="404"),

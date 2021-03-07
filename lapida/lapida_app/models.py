@@ -72,6 +72,7 @@ class Order_User(models.Model):
 	services = models.CharField(max_length=200)
 	note = models.CharField(max_length=180)
 	order_date = models.DateTimeField(default=datetime.now,blank=True)
+	image = models.ImageField(upload_to='image',blank=True,default='image/upload_default.png')
 	ctime = models.DateTimeField(auto_now_add=True)
 	uptime = models.DateTimeField(auto_now=True)
 

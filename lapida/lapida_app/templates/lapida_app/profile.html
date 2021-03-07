@@ -1,13 +1,16 @@
 {% extends "lapida_app/base.html" %}
 {% load static %}
 {% block content  %}
+{% load sweetify %}
 <!DOCTYPE html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <html lang="en">
+{% sweetify %}
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
@@ -53,7 +56,9 @@
       {%endif%}
     </td>
       <td>{{item.street}}, {{item.blk}} - {{item.lot}} </td>
-      <td><a href="{%url 'delete' uid=item.uid%}"><button type="button" class="btn btn-danger" style="margin-left:20px">Delete</button></td>
+      <td><a href="{%url 'delete' uid=item.uid%}" uid="{{item.uid}}" class="btn btn-danger aaf">
+        <i class="fa fa-minus" aria-hidden="true"></i> Delete Profile
+      </a></td>
     </tr>
   </tbody>
 {%endfor%}
@@ -64,7 +69,7 @@
  <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
         <h2>User Transactions</h2>
-        <a href="{%url 'create-dead'%}" class="btn btn-success">
+        <a href="{%url 'menu'%}" class="btn btn-success">
           <i class="fa fa-plus" aria-hidden="true"></i> Add Transaction
           </a>
       </div>
@@ -104,6 +109,41 @@
       </div>
     </section>
   </main><!-- End #main -->
+<script>
+$(function() {
+    $('.aaf').click(function (e) {
+            e.preventDefault();
+            var tthis = $(this);
+            var usersid =  $(this).attr("uid");
+            var url = "{% url 'delete' uid=1 %}".replace('1', usersid);
+            console.log(usersid);
+
+      Swal.fire({
+      title: "Are you sure?",
+      text: "Your profile will be deleted.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+      dangerMode: true,
+    }).then(function(isConfirm) {
+      if (isConfirm) {
+        swal({
+          title: 'Profile has been deleted!',
+          text: 'Your profile successfully deleted!',
+          icon: 'success'
+        }).then(function() {
+             $.get( url, function( data ) { 
+                });
+        });
+      } else {
+        swal("Cancelled", "Your Profile is safe :)", "error");
+      }
+    })
+});
+      
+});
+</script>
 {%endblock%}
 </body>
 

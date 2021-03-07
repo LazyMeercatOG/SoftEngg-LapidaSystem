@@ -10,7 +10,7 @@ from django.contrib.auth.models import Group
 from .models import User_Place, MasterData_Revised, CareTaker, Order_User, Caretaker_Task
 from .resources import MasterData_RevisedResource
 from django.core.exceptions import ObjectDoesNotExist
-
+import sweetify
 
 
 @login_required(login_url='login')
@@ -130,7 +130,7 @@ def menu(request):
 		current_price = 0
 		options = []
 		uid = request.POST.get('uid')
-		instance = Order_User(profile_dead=User_Place.objects.get(uid=uid))
+		instance = Order_User(profile_dead=User_Place.objects.get(user=request.user,uid=uid))
 		for x in range(6,10):
 			check = request.POST.get('customCheck'+ str(x))
 			if check:
@@ -151,8 +151,29 @@ def menu(request):
 			instance.services = options
 			instance.note = note
 			instance.save()
+			profile_dead = MasterData_Revised.objects.get(uid=instance.profile_dead.uid)
+			dead_place = get_cemetery(profile_dead.place)
+			caretaker_profile = CareTaker.objects.filter(cemetery=dead_place)
+			caretaker_p = []
+			for i in caretaker_profile:
+				caretaker_p.append(i)
+			caretaker_task_instance = Caretaker_Task(caretaker=caretaker_p[0])
+			caretaker_task_instance.order = instance
+			caretaker_task_instance.save()
 			return redirect('summary',instance.id)
 	return render(request, 'lapida_app/menu.html',context)
+
+def get_cemetery(place):
+	if place == "Manila North C":
+		final_place = "MN"
+	elif place == "Manila South C":
+		final_place = "MS"
+	elif place == "La Loma C":
+		final_place = "L"
+	elif place == "	Manila Chinese C":
+		final_place = "MC"
+	return final_place
+
 
 def get_options(x):
 	if x == 6:
@@ -192,8 +213,9 @@ def get_flower_price(flower, current_price):
 
 @login_required(login_url='login')
 def delete_record(request,uid):
-	dead_profile = User_Place.objects.get(uid=uid)
+	dead_profile = User_Place.objects.get(user=request.user,uid=uid)
 	dead_profile.delete()
+	sweetify.success(request, 'You did it', text='Profile has been deleted',persistent='Hell yeah')
 	return redirect('profile')
 
 @login_required(login_url='login')
@@ -234,6 +256,15 @@ def approve_payment(request,id):
 
 def no_permission(request):
 	return render(request,'lapida_app/no_permission.html')
+
+def update_picture(request,id):
+	if request.method == 'POST':
+		print("POST")
+		order = Order_User.objects.get(id=id)
+		order.image = request.FILES['image']
+		order.save()
+		context = {'form':order}
+		return render(request,'lapida_app/summary.html',context)
 
 def export(request):
     member_resource = MasterData_RevisedResource()
