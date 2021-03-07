@@ -1,6 +1,10 @@
 {% extends "lapida_app/base.html" %}
 {% load static %}
 {% block content  %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{{order.media}}
 
 <!-- Demo header-->
 <head>
@@ -126,7 +130,6 @@
                         <div class="card-body p-5">
                             <h2 class="h4 mb-1">Select the Date of Service</h2>
                             <p class="small text-muted font-italic mb-4">Please choose the date on when to avail the selected service/s.</p>
-                            <input class="datepickerclass" id="datepicker" width="276" onkeydown="return false"/>
                             {{order.order_date}}
                         </div>
                     </div>

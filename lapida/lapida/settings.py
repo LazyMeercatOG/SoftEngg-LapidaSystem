@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'django_tables2',
     'import_export',
+    'bootstrap_datepicker_plus',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [

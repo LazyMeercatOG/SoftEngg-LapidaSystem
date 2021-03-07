@@ -5,6 +5,8 @@ from django import forms
 from django.contrib.auth.models import User
 from phonenumber_field.formfields import PhoneNumberField
 from .models import Profile, User_Place, MasterData_Revised, Order_User
+from bootstrap_datepicker_plus import DatePickerInput
+import datetime
 
 
 class CreateUserForm(UserCreationForm):
@@ -53,12 +55,16 @@ class DateInput(forms.DateInput):
 
 
 class Order_UserForm(forms.ModelForm):
-	class Meta:
-		model = Order_User
-		order_date = models.DateTimeField()
-		fields = ['order_date']
-		widgets = {
-			'order_date': DateInput()
-		}	
+    class Meta:
+        model = Order_User
+        fields = ['order_date']
+        widgets = {
+            'order_date': DatePickerInput(
+            attrs={'required': True},
+            options ={
+            "minDate": (datetime.datetime.today().strftime('%m-%d-%Y'))
+            }
+            )
+        }
 
 
