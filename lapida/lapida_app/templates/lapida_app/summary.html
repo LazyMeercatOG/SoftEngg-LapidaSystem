@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-5">
-            <div class="project-info-box mt-0">
+            <div class="project-info-box">
                 <h5>REQUEST DETAILS</h5>
                 <p class="mb-0">{{form.services}}</p>
             </div><!-- / project-info-box -->
@@ -28,18 +28,39 @@
             <div class="project-info-box mt-0 mb-0">
             </div><!-- / project-info-box -->
   {%endif%}
-        </div><!-- / column -->
+
+            <div class="col-md-13">
+                        <div class="project-info-box">
+                            <label class="form-label" for="customFile">Upload the proof of service here:</label>
+                            <input type="file" class="form-control" style="margin-bottom:7px" id="customFile" accept="image/* "/>
+                            <button type="button" class="btn btn-primary btn-lg" style="margin-bottom:5px">Update Transaction</button>
+                            <button type="button" class="btn btn-success btn-lg">Confirm Transaction</button>
+                            </div>
+                    </div>
+
+        </div>
+
+
+
+
+        <!-- / column -->
         <div class="col-md-7">
-            <img src="https://via.placeholder.com/400x300/FFB6C1/000000" alt="project-image" class="rounded">
+            <div class="project-info-box">
+                <p>Proof of Service Preview:</p>
+                <img src="https://lh3.googleusercontent.com/proxy/_Jy2jmk_6yg-xlrRhK_-j7_ES8uPt6M9Gepb9M5xci_oATnZX9eY_rz42Ge-YmVKcU87yqj6MrBFCxC0Ay1hcXBZ3twUqhG9qahdTkwAKg" alt="project-image" class="rounded" id="display-img" style="width:650px;height:500px">
+            </div>
             <div class="project-info-box">
                 <p><b>Categories:</b> Design, Illustration</p>
                 <p><b>Skills:</b> Illustrator</p>
             </div><!-- / project-info-box -->
         </div><!-- / column -->
+
+
     </div>
 </div>
  <!-- Include the PayPal JavaScript SDK -->
     <script src="https://www.paypal.com/sdk/js?client-id=AZ99n5v8uTUjhoGvST_V46LKtl5yCCtEAubC2ReOKeWVjkSkd1SYrHda3RRlUbODi4q7CBivVyBV2Rso&currency=PHP"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <script>
         // Render the PayPal button into #paypal-button-container
@@ -69,4 +90,15 @@
 
         }).render('#paypal-button-container');
     </script>
+
+    <script>
+        $(document).ready(function(){
+            $("#customFile").change(function(event){
+                var x = URL.createObjectURL(event.target.files[0]);
+                $("#display-img").attr("src",x);
+                console.log(event);
+                });
+        })
+    </script>
+
 {%endblock%}

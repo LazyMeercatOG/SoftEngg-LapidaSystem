@@ -54,7 +54,7 @@ class DateInput(forms.DateInput):
 
 class Order_UserForm(forms.ModelForm):
 	class Meta:
-		model =  Order_User
+		model = Order_User
 		order_date = models.DateTimeField()
 		fields = ['order_date']
 		widgets = {

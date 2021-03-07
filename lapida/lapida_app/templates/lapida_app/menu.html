@@ -10,6 +10,7 @@
       <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
       <link href="{% static 'lapida_app/menu/menu.css' %}" rel="stylesheet">
       <link href="{% static 'lapida_app/menu/css/gijgo.min.css' %}" rel="stylesheet">
+
 </head>
 <section class="py-5 header text-center text-white">
     <div class="container pt-4">
@@ -125,7 +126,7 @@
                         <div class="card-body p-5">
                             <h2 class="h4 mb-1">Select the Date of Service</h2>
                             <p class="small text-muted font-italic mb-4">Please choose the date on when to avail the selected service/s.</p>
-                            <input id="datepicker" width="276" onkeydown="return false"/>
+                            <input class="datepickerclass" id="datepicker" width="276" onkeydown="return false"/>
                             {{order.order_date}}
                         </div>
                     </div>
