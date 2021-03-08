@@ -112,41 +112,6 @@
 <script>
 $(function() {
     $('.aaf').click(function (e) {
-            e.preventDefault();
-            var tthis = $(this);
-            var usersid =  $(this).attr("uid");
-            var url = "{% url 'delete' uid=1 %}".replace('1', usersid);
-            console.log(usersid);
-      Swal.fire({
-      title: "Are you sure?",
-      text: "Your profile will be deleted.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes",
-      cancelButtonText: "No",
-      dangerMode: true,
-    }).then(function(isConfirm) {
-      if (isConfirm) {
-        swal({
-          title: 'Profile has been deleted!',
-          text: 'Your profile successfully deleted!',
-          icon: 'success'
-        }).then(function() {
-             $.get( url, function( data ) { 
-                });
-        });
-      } else {
-        swal("Cancelled", "Your Profile is safe :)", "error");
-      }
-    })
-});
-      
-});
-</script>
-
-<script>
-$(function() {
-    $('.aaf').click(function (e) {
       e.preventDefault();
       var tthis = $(this);
       var usersid =  $(this).attr("uid");

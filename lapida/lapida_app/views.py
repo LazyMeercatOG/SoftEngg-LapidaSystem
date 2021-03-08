@@ -242,7 +242,6 @@ def summary(request, id):
 	context = {'form':order}
 	return render(request, 'lapida_app/summary.html',context)
 
-@login_required(login_url='login')
 def approve_payment(request,id):
 	order = Order_User.objects.get(id=id)
 	print(order)
@@ -262,6 +261,16 @@ def update_picture(request,id):
 		order.save()
 		context = {'form':order}
 		return render(request,'lapida_app/summary.html',context)
+
+def update_status(request,id):
+	order = Order_User.objects.get(id=id)
+	if order.status == "Pa":
+		order.status = "O"
+	elif order.status == "O":
+		order.status = "C"
+	order.save()
+	context = {'form':order}
+
 
 def export(request):
     member_resource = MasterData_RevisedResource()

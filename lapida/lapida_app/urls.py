@@ -19,6 +19,7 @@ urlpatterns = [
     path('summary/<int:id>',views.summary,name='summary'),
     path('update_picture/<int:id>',views.update_picture,name='update-picture'),
     path('success/<int:id>',views.approve_payment,name='approvepayment'),
+    path('update_status/<int:id>',views.update_status,name='update-status'),
     path('delete/<slug:uid>',views.delete_record,name='delete'),
     path('403/',views.no_permission,name="404"),
     path('admin/', admin.site.urls),

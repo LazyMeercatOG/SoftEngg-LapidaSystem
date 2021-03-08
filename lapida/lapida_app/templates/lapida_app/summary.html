@@ -80,10 +80,11 @@
                             {%csrf_token%}
                             <label class="form-label" for="customFile">Upload the proof of service here:</label>
                             <input type="file" name="image" class="form-control" style="margin-bottom:7px" id="customFile" accept="image/* "/>
-                            <button type="submit" class="btn btn-primary btn-lg" onclick="return confirm('Are you sure you want to update the picture?');"style="margin-bottom:5px">Update Transaction</button>
+                            <button type="submit" class="btn btn-primary btn-lg" onclick="return confirm('Are you sure you want to update the picture?');"style="margin-bottom:5px">Update Image</button>
                         </form>
-                            {%if form.status == "Pa" %}
-                            <button type="button" class="btn btn-success btn-lg">Confirm Transaction</button>
+                            {%if form.status == "Pa" or form.status == "O" %}
+                            <a href="" order_id="{{form.id}}" class="btn btn-success btn-lg aaf"> Update Transaction
+                            </a>
                             {%endif%}
                             </div>
                     </div>
@@ -152,5 +153,58 @@
                 });
         })
     </script>
+
+
+<script>
+$(function() {
+    $('.aaf').click(function (e) {
+      e.preventDefault();
+      var tthis = $(this);
+      var usersid =  $(this).attr("order_id");
+      var url = "{% url 'update-status' id=1 %}".replace('1', usersid);
+      var url_href = "{% url 'summary' id=1 %}".replace('1', usersid);
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You're updating the status of this order to the next step (Paid -> Ongoing -> Completed)",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, update it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Updated!',
+          'Your task has been updated!',
+          'success'
+        ).then(function(){ 
+    $.get( url, function( data ) { 
+  });
+    location.href = url_href
+   });
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your request is cancelled. :)',
+          'error'
+        )
+      }
+    })
+     
+      
+});
+});
+
+</script>
 
 {%endblock%}
