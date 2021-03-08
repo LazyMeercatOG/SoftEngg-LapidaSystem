@@ -158,8 +158,8 @@ body {
 	<div class="row">
 
 		<section class="content">
-			<h1>Caretaker Dashboard</h1>
-			<div class="col-md-8 col-md-offset-2">
+			<h1 style="margin-left:70px">Caretaker Dashboard</h1>
+			<div class="col-md-10 col-md-offset-1">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<div class="pull-right">
@@ -199,7 +199,11 @@ body {
 												<div class="media-body">
 													<span class="media-meta pull-right">{{item.ctime|date:"D d M Y"}}</span>
 													<h4 class="title">
-														{{item.profile_dead.user}} - {{item.profile_dead.uid.last_name}}, {{item.profile_dead.uid.first_name}} {{item.profile_dead.uid.middle_name}}
+														<div>
+															<a href="{%url 'summary' id=item.id%}" class="pull-left">
+															{{item.profile_dead.user}} - {{item.profile_dead.uid.last_name}}, {{item.profile_dead.uid.first_name}} {{item.profile_dead.uid.middle_name}}
+															</a>
+														</div>
 														{%if item.status == "C"%}
 														<span class="pull-right pagado" style="font-size:16px">{{item.get_status_display}}</span>
 														{%elif item.status == "P" or item.status == "O" or item.status == "Pa" %}
@@ -208,7 +212,10 @@ body {
 														<span class="pull-right cancelado" style="font-size:16px">{{item.get_status_display}}</span>
 														{%endif%}
 													</h4>
-													<p class="summary" style="font-size:12px"><i>{{item.services}}</i></p>
+													<div>
+														<br>
+														<p class="summary" style="font-size:12px"><i>{{item.services}}</i></p>
+													</div>
 												</div>
 											</div>
 										</td>
