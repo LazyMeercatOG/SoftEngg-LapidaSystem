@@ -11,6 +11,7 @@
       <h2>Care for your loved ones, even through life.</h2>
       {%if user.is_authenticated%}
       <a href="{%url 'create-dead'%}" class="btn-get-started scrollto">Get Started</a>
+      <a href="{%url 'menu'%}" class="btn-get-started scrollto">Avail Our Services</a>
       {%else%}
        <a href="{%url 'register'%}" class="btn-get-started scrollto">Get Started</a>
       {%endif%}
@@ -156,7 +157,7 @@
             <div class="icon-box">
               <div class="icon"><i class="bx bxs-flame"></i></div>
               <h4><a href="">Candle Lights</a></h4>
-              <p>Light candles to your loved one for their guidance.</p>
+              <p>Light candles to the memory of your loved one.</p>
             </div>
           </div>
 
@@ -172,7 +173,7 @@
             <div class="icon-box">
               <div class="icon"><i class="bx bx-arch"></i></div>
               <h4><a href="">Prayer Service</a></h4>
-              <p>This service provides a personal prayer for your loved one to put their souls at ease and to send a heartfelt message.</p>
+              <p>This service provides a personal prayer for your loved one to receive a personal, heartfelt message.</p>
             </div>
           </div>
 
@@ -394,7 +395,7 @@
         <div class="row">
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
             <div class="member">
-              <img src="{% static 'lapida_app/index/img/team/team-a.png' %}" alt="">
+              <img src="{% static 'lapida_app/index/img/team/team-a.png' %}" alt="" style="width:500px;height:auto">
               <h4>LazyMeercat</h4>
               <span>Laging Tulog</span>
 <!--              <p>-->
@@ -463,7 +464,7 @@
             <div class="info-box mb-4">
               <i class="bx bx-map"></i>
               <h3>Our Address</h3>
-              <p>A108 Adam Street, New York, NY 535022</p>
+              <p>363 Pascual Casal St, Quiapo, Manila</p>
             </div>
           </div>
 
@@ -471,7 +472,7 @@
             <div class="info-box  mb-4">
               <i class="bx bx-envelope"></i>
               <h3>Email Us</h3>
-              <p>contact@example.com</p>
+              <p>tip.edu.ph@gmail.com</p>
             </div>
           </div>
 
@@ -479,7 +480,7 @@
             <div class="info-box  mb-4">
               <i class="bx bx-phone-call"></i>
               <h3>Call Us</h3>
-              <p>+1 5589 55488 55</p>
+              <p>(02) 8736-4208</p>
             </div>
           </div>
 
@@ -487,34 +488,34 @@
 
         <div class="row" data-aos="fade-up">
 
-          <div class="col-lg-6 ">
-            <iframe class="mb-4 mb-lg-0" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
+          <div align="center">
+            <iframe class="mb-4 mb-lg-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.065908981699!2d120.98578831432022!3d14.595320181120162!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c9f618e826d3%3A0xeb7fcfb4bf255def!2sTechnological%20Institute%20of%20the%20Philippines!5e0!3m2!1sen!2sph!4v1615210740715!5m2!1sen!2sph" frameborder="0" style="border:0; width: 50%; height: 384px;" allowfullscreen></iframe>
           </div>
 
-          <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                </div>
-              </div>
-              <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-              </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
-            </form>
-          </div>
+<!--          <div class="col-lg-6">-->
+<!--            <form action="forms/contact.php" method="post" role="form" class="php-email-form">-->
+<!--              <div class="row">-->
+<!--                <div class="col-md-6 form-group">-->
+<!--                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>-->
+<!--                </div>-->
+<!--                <div class="col-md-6 form-group mt-3 mt-md-0">-->
+<!--                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="form-group mt-3">-->
+<!--                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>-->
+<!--              </div>-->
+<!--              <div class="form-group mt-3">-->
+<!--                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>-->
+<!--              </div>-->
+<!--              <div class="my-3">-->
+<!--                <div class="loading">Loading</div>-->
+<!--                <div class="error-message"></div>-->
+<!--                <div class="sent-message">Your message has been sent. Thank you!</div>-->
+<!--              </div>-->
+<!--              <div class="text-center"><button type="submit">Send Message</button></div>-->
+<!--            </form>-->
+<!--          </div>-->
 
         </div>
 
@@ -524,64 +525,64 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
+<!--  <footer id="footer">-->
+<!--    <div class="footer-top">-->
+<!--      <div class="container">-->
+<!--        <div class="row">-->
 
-          <div class="col-lg-4 col-md-6">
-            <div class="footer-info">
-              <h3>Day</h3>
-              <p>
-                A108 Adam Street <br>
-                NY 535022, USA<br><br>
-                <strong>Phone:</strong> +1 5589 55488 55<br>
-                <strong>Email:</strong> info@example.com<br>
-              </p>
-              <div class="social-links mt-3">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
+<!--          <div class="col-lg-4 col-md-6">-->
+<!--            <div class="footer-info">-->
+<!--              <h3>Day</h3>-->
+<!--              <p>-->
+<!--                A108 Adam Street <br>-->
+<!--                NY 535022, USA<br><br>-->
+<!--                <strong>Phone:</strong> +1 5589 55488 55<br>-->
+<!--                <strong>Email:</strong> info@example.com<br>-->
+<!--              </p>-->
+<!--              <div class="social-links mt-3">-->
+<!--                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>-->
+<!--                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>-->
+<!--                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>-->
+<!--                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>-->
+<!--                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
 
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
+<!--          <div class="col-lg-2 col-md-6 footer-links">-->
+<!--            <h4>Useful Links</h4>-->
+<!--            <ul>-->
+<!--              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>-->
+<!--              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>-->
+<!--              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>-->
+<!--              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>-->
+<!--              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>-->
+<!--            </ul>-->
+<!--          </div>-->
 
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
+<!--          <div class="col-lg-2 col-md-6 footer-links">-->
+<!--            <h4>Our Services</h4>-->
+<!--            <ul>-->
+<!--              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>-->
+<!--              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>-->
+<!--              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>-->
+<!--              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>-->
+<!--              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>-->
+<!--            </ul>-->
+<!--          </div>-->
 
-          <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
+<!--          <div class="col-lg-4 col-md-6 footer-newsletter">-->
+<!--            <h4>Our Newsletter</h4>-->
+<!--            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>-->
+<!--            <form action="" method="post">-->
+<!--              <input type="email" name="email"><input type="submit" value="Subscribe">-->
+<!--            </form>-->
 
-          </div>
+<!--          </div>-->
 
-        </div>
-      </div>
-    </div>
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
 {%endblock%}
 </body>
 
