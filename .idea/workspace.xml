@@ -4,7 +4,7 @@
     <list default="true" id="1588a567-0048-444e-a6ff-457aeeb9cc05" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lapida/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/lapida/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lapida/lapida_app/templates/lapida_app/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/lapida/lapida_app/templates/lapida_app/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lapida/lapida_app/templates/lapida_app/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/lapida/lapida_app/templates/lapida_app/register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
