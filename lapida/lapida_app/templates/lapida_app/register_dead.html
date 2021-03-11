@@ -1,6 +1,10 @@
 {% extends "lapida_app/base.html" %}
 {% load static %}
 {% block content  %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{{form_1.media}}
 <!DOCTYPE html>
 <html>
 	<head>
@@ -32,12 +36,35 @@
 					    {% endfor %}
 					{% endif %}
 					<h3>Register a loved one</h3>
-					<div class="form-row">
+					<div class="form-wrapper">
+						<label for="">Select Cemetery*</label>
+                  <select class="form-select" name="cemetery" aria-label="Default select example" required>
+                  <option selected disabled value ="">Select Cemetery </option>
+                  <option value="MN"> Manila North </option>
+              	  <option value="MS"> Manila South </option>
+              	  <option value="L"> La Loma </option>
+				  <option value="MC"> Manila Chinese </option>
+                </select>
+            </div>
+            				   <div class="form-row">
 						<div class="form-wrapper">
 							<label for="">UID of the Deceased*</label>
 							{{form.uid}}
 							<small class="form-text text-muted">Please make sure that the UID for the registered occupant is correct.</small>
+							<label for="">First Name*</label>
+							{{form.uid}}
+							<small class="form-text text-muted">Enter First Name.</small>
+							<label for="">Middle Name*</label>
+							{{form.uid}}
+							<small class="form-text text-muted">Enter Middle Name.</small>
+							<label for="">Last Name*</label>
+							{{form.uid}}
+							<small class="form-text text-muted">Enter Last Name. </small>
 					</div>
+					<div class="form-wrapper">
+					<label for="">Birth Date*</label>	
+					{{form_1.birth_date}}
+				</div>
 					<button data-text="Register">
 						<span>Register</span>
 					</button>

@@ -53,12 +53,6 @@
                             </label>
                     		{%csrf_token%}
                             <br>
-                     <div class="input-group">
-                            <label class="label">Username</label>
-                            <div class="input-group">
-                                   {{form.username}}
-                            </div>
-                        </div>
                         <div class="row row-space">
                                 <div class="input-group">
                                     <label class="label">first name</label>
@@ -67,41 +61,28 @@
                                 <div class="input-group">
                                     <label class="label">Middle Name</label>
 <!--                                    change to middle name-->
-                                    {{form.first_name}}
+                                    {{form_1.middle_name}}
                                 </div>
                                 <div class="input-group">
                                     <label class="label">last name</label>
                                     {{form.last_name}}
                                 </div>
                         </div>
+                     <div class="input-group">
+                            <label class="label">Username</label>
+                            <div class="input-group">
+                                   {{form.username}}
+                            </div>
+                        </div>
+                        {% load widget_tweaks %}
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Phone Number</label>
-                                   {{form_1.phone}}
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Gender</label>
-                                    <div class="p-t-10">
-                                        <label class="radio-container m-r-45">Male
-                                            <input type="radio" checked="checked" name="gender" value ="M">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="radio-container">Female
-                                            <input type="radio" name="gender" value ="F">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="radio-container">Prefer Not to Say
-                                            <input type="radio" name="gender" value ="O">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
+                                   {{form_1.phone|add_class:"input--style-4"}}
                                 </div>
                             </div>
                         </div>
-                          {% load widget_tweaks %}
                             <div class="input-group">
                                     <label class="label">Email</label>
                                     {{form.email|add_class:"input--style-4"}}
