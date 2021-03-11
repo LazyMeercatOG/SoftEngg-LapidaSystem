@@ -43,7 +43,7 @@ a {
   outline: none; }
 
 .wrapper {
-  min-height: 120vh;
+  min-height: 160vh;
   position: relative;
   background: url("../images/bg-registration-form-9.png") no-repeat right center;
   background-size: cover; }

@@ -41,7 +41,7 @@ class ProfileForm(forms.ModelForm):
         fields = ["middle_name", "phone"]
         widgets = {
             "middle_name": forms.TextInput(attrs={"class": "input--style-4"}),
-            "phone": PhoneNumberPrefixWidget(),
+            "phone": PhoneNumberPrefixWidget(initial='PH'),
         }
 
 

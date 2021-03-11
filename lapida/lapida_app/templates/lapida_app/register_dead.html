@@ -36,30 +36,33 @@
 					    {% endfor %}
 					{% endif %}
 					<h3>Register a loved one</h3>
+					<small class="form-text text-muted">The system will check if the deceased is actually registered in the particular cemetery, so please ensure that the information that you will provide is correct.</small><br>
 					<div class="form-wrapper">
-						<label for="">Select Cemetery*</label>
+						<label for="">Select Cemetery:</label>
                   <select class="form-select" name="cemetery" aria-label="Default select example" required>
-                  <option selected disabled value ="">Select Cemetery </option>
+                  <option selected disabled value ="">--</option>
                   <option value="MN"> Manila North </option>
               	  <option value="MS"> Manila South </option>
               	  <option value="L"> La Loma </option>
 				  <option value="MC"> Manila Chinese </option>
                 </select>
             </div>
-            				   <div class="form-row">
 						<div class="form-wrapper">
-							<label for="">UID of the Deceased*</label>
-							{{form.uid}}
-							<small class="form-text text-muted">Please make sure that the UID for the registered occupant is correct.</small>
+<!--							<label for="">UID of the Deceased*</label>-->
+<!--							{{form.uid}}-->
+<!--							<small class="form-text text-muted">Please make sure that the UID for the registered occupant is correct.</small>-->
 							<label for="">First Name*</label>
 							{{form.uid}}
-							<small class="form-text text-muted">Enter First Name.</small>
+<!--							{{form.firstname}}-->
+<!--							<small class="form-text text-muted">Enter First Name.</small>-->
 							<label for="">Middle Name*</label>
 							{{form.uid}}
-							<small class="form-text text-muted">Enter Middle Name.</small>
+<!--							{{form.middlename}}-->
+<!--							<small class="form-text text-muted">Enter Middle Name.</small>-->
 							<label for="">Last Name*</label>
 							{{form.uid}}
-							<small class="form-text text-muted">Enter Last Name. </small>
+<!--							{{form.lastname}}-->
+<!--							<small class="form-text text-muted">Enter Last Name. </small>-->
 					</div>
 					<div class="form-wrapper">
 					<label for="">Birth Date*</label>	
