@@ -154,14 +154,17 @@ def menu(request):
     query_results = User_Place.objects.filter(user=request.user)
     form = Order_UserForm(request.POST)
     dead_profile = []
+    cemeteries = []
     for dead in query_results:
-        dead_profile.append(MasterData_Revised.objects.get(uid=dead))
+        person_dead = MasterData_Revised.objects.get(uid=dead)
+        dead_profile.append(person_dead)
+        cemeteries.append(person_dead.place)
     if not dead_profile:
         messages.error(
             request, "Please register a profile of your loved one first."
         )
         return redirect("create-dead")
-    context = {"form": dead_profile, "order": form}
+    context = {"form": dead_profile, "order": form, "cemeteries": cemeteries}
     if request.method == "POST":
         current_price = 0
         options = []

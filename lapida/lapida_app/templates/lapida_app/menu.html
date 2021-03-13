@@ -5,7 +5,7 @@
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
 {{order.media}}
-
+{% load define_action %}
 <!-- Demo header-->
 <head>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
@@ -40,14 +40,17 @@
                   <option selected disabled value ="">Select a Loved One</option>
                   {%for item in form%}
                   <option value="{{item.uid}}">{{item.last_name}}, {{item.first_name}} {{item.middle_name}}</option>
+                  
                   {%endfor%}
                 </select>
                     </div>
                 </div>
-
                 <div class="card shadow border-0 mb-5">
                     <div class="card-body p-5">
                         <h2 class="h4 mb-1">Pick a Service</h2>
+<!--                          {%for place in cemeteries%}
+                         <p> {{place}} </p>
+                         {%endfor%} -->
                         <p class="small text-muted font-italic mb-4">You can pick any number of services to avail.</p>
                             {% csrf_token %}
                         <ul class="list-group mx-auto">

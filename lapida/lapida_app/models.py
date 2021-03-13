@@ -63,6 +63,8 @@ class User_Place(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     uid = models.ForeignKey(
         MasterData_Revised,
+        to_field="uid",
+        db_column="uid",
         on_delete=models.CASCADE,
     )
 
