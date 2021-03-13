@@ -41,7 +41,7 @@ class ProfileForm(forms.ModelForm):
         fields = ["middle_name", "phone"]
         widgets = {
             "middle_name": forms.TextInput(attrs={"class": "input--style-4"}),
-            "phone": PhoneNumberPrefixWidget(initial='PH'),
+            "phone": PhoneNumberPrefixWidget(initial="PH"),
         }
 
 
@@ -56,16 +56,32 @@ class User_PlaceForm(forms.ModelForm):
             ),
         }
         # def clean_uid(self):
-        # 	uid = self.cleaned_data.get('uid')
-        # 	try:
-        # 	   dead = MasterData_Revised.objects.get(uid = uid)
-        # 	   print(dead)
-        # 	except ObjectDoesNotExist:
-        # 	   raise forms.ValidationError('The UID you inputted was not found in our database')
-        # 	return uid
+        #   uid = self.cleaned_data.get('uid')
+        #   try:
+        #      dead = MasterData_Revised.objects.get(uid = uid)
+        #      print(dead)
+        #   except ObjectDoesNotExist:
+        #      raise forms.ValidationError('The UID you inputted was not found in our database')
+        #   return uid
 
 
 class EventForm(forms.Form):
+    first_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "required": True}
+        ),
+    )
+    middle_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "required": True}
+        ),
+    )
+    last_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "required": True}
+        ),
+    )
+
     birth_date = forms.DateField(
         widget=DatePickerInput(attrs={"required": True})
     )

@@ -49,7 +49,7 @@ class MasterData_Revised(models.Model):
     last_name = models.CharField(max_length=60)
     first_name = models.CharField(max_length=60)
     middle_name = models.CharField(max_length=60)
-    birthdate = models.DateTimeField(default=datetime.now, blank=True)
+    birthdate = models.DateField(blank=True)
     category = models.CharField(max_length=2, choices=STORAGE_CHOICES)
     blk = models.CharField(max_length=3)
     street = models.CharField(max_length=12)

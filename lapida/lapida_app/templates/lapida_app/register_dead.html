@@ -4,7 +4,7 @@
 {% load bootstrap4 %}
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
-{{form_1.media}}
+{{form.media}}
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,8 +18,7 @@
 		<!-- MATERIAL DESIGN ICONIC FONT -->
 		<link rel="stylesheet" href="{% static 'lapida_app/register_dead/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css'%}">
 
-		<!-- DATE-PICKER -->
-		<link rel="stylesheet" href="{% static 'lapida_app/register_dead/vendor/date-picker/css/datepicker.min.css'%}">
+
 		
 		<!-- STYLE CSS -->
 		<link rel="stylesheet" href="{% static 'lapida_app/register_dead/css/style.css'%}">
@@ -48,25 +47,19 @@
                 </select>
             </div>
 						<div class="form-wrapper">
-<!--							<label for="">UID of the Deceased*</label>-->
-<!--							{{form.uid}}-->
-<!--							<small class="form-text text-muted">Please make sure that the UID for the registered occupant is correct.</small>-->
 							<label for="">First Name*</label>
-							{{form.uid}}
-<!--							{{form.firstname}}-->
-<!--							<small class="form-text text-muted">Enter First Name.</small>-->
+							{{form.first_name}}
+							<small class="form-text text-muted">Enter First Name.</small>
 							<label for="">Middle Name*</label>
-							{{form.uid}}
-<!--							{{form.middlename}}-->
-<!--							<small class="form-text text-muted">Enter Middle Name.</small>-->
+								{{form.middle_name}}
+						<small class="form-text text-muted">Enter Middle Name.</small>
 							<label for="">Last Name*</label>
-							{{form.uid}}
-<!--							{{form.lastname}}-->
-<!--							<small class="form-text text-muted">Enter Last Name. </small>-->
+						{{form.last_name}}
+							<small class="form-text text-muted">Enter Last Name. </small>
 					</div>
 					<div class="form-wrapper">
 					<label for="">Birth Date*</label>	
-					{{form_1.birth_date}}
+					{{form.birth_date}}
 				</div>
 					<button data-text="Register">
 						<span>Register</span>

@@ -3,7 +3,6 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import (
     CreateUserForm,
     ProfileForm,
-    User_PlaceForm,
     Order_UserForm,
     EventForm,
 )
@@ -100,9 +99,8 @@ def register(request):
 @login_required(login_url="login")
 def create_dead(request):
     if request.method == "POST":
-        form = User_PlaceForm(request.POST)
-        form_1 = EventForm(request.POST)
-        uid = request.POST.get("uid")
+        form = EventForm(request.POST)
+        cemetery = request.POST.get("cemetery")
         dead_profile = []
         query_results = User_Place.objects.filter(user=request.user)
         for dead in query_results:
@@ -119,16 +117,15 @@ def create_dead(request):
             messages.error(
                 request, "The UID you inputted was not found in our database."
             )
-        if form.is_valid():
-            dead = form.save(commit=False)
-            dead.user = request.user
-            dead.uid = MasterData_Revised.objects.get(uid=uid)
-            dead.save()
-            return redirect("profile")
+        # if form.is_valid():
+        #     dead = form.save(commit=False)
+        #     dead.user = request.user
+        #     dead.uid = MasterData_Revised.objects.get(uid=uid)
+        #     dead.save()
+        #     return redirect("profile")
     else:
-        form = User_PlaceForm()
-        form_1 = EventForm()
-    context = {"form": form, "form_1": form_1}
+        form = EventForm()
+    context = {"form": form}
     return render(request, "lapida_app/register_dead.html", context)
 
 
