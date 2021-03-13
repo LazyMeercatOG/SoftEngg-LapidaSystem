@@ -81,7 +81,6 @@ class EventForm(forms.Form):
             attrs={"class": "form-control", "required": True}
         ),
     )
-
     birth_date = forms.DateField(
         widget=DatePickerInput(attrs={"required": True})
     )

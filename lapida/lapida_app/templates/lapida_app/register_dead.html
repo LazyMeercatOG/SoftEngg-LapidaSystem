@@ -5,6 +5,7 @@
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
 {{form.media}}
+{% load sweetify %}
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,32 +19,31 @@
 		<!-- MATERIAL DESIGN ICONIC FONT -->
 		<link rel="stylesheet" href="{% static 'lapida_app/register_dead/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css'%}">
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
 		<!-- STYLE CSS -->
 		<link rel="stylesheet" href="{% static 'lapida_app/register_dead/css/style.css'%}">
 	</head>
 
 	<body>
+{% sweetify %}
 		<div class="wrapper">
 			<div class="inner">
 				<form method = "POST">
 					{% csrf_token %}
-					{%if messages%}
-					{% for message in messages %}
-					  <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
-					    {% endfor %}
-					{% endif %}
 					<h3>Register a loved one</h3>
 					<small class="form-text text-muted">The system will check if the deceased is actually registered in the particular cemetery, so please ensure that the information that you will provide is correct.</small><br>
 					<div class="form-wrapper">
 						<label for="">Select Cemetery:</label>
                   <select class="form-select" name="cemetery" aria-label="Default select example" required>
                   <option selected disabled value ="">--</option>
-                  <option value="MN"> Manila North </option>
-              	  <option value="MS"> Manila South </option>
-              	  <option value="L"> La Loma </option>
-				  <option value="MC"> Manila Chinese </option>
+                  <option value="Manila North C"> Manila North </option>
+              	  <option value="Manila South C"> Manila South </option>
+              	  <option value="La Loma C"> La Loma </option>
+				  <option value="Manila Chinese C"> Manila Chinese </option>
                 </select>
             </div>
 						<div class="form-wrapper">

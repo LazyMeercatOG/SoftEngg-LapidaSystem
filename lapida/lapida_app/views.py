@@ -98,31 +98,39 @@ def register(request):
 
 @login_required(login_url="login")
 def create_dead(request):
-    if request.method == "POST":
-        form = EventForm(request.POST)
+    form = EventForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
         cemetery = request.POST.get("cemetery")
         dead_profile = []
         query_results = User_Place.objects.filter(user=request.user)
         for dead in query_results:
             dead_profile.append(MasterData_Revised.objects.get(uid=dead))
         try:
-            dead = MasterData_Revised.objects.get(uid=uid)
-            if dead in dead_profile:
-                messages.error(
+            person = MasterData_Revised.objects.get(
+                place=cemetery,
+                first_name=form.cleaned_data.get("first_name"),
+                middle_name=form.cleaned_data.get("middle_name"),
+                last_name=form.cleaned_data.get("last_name"),
+                birthdate=form.cleaned_data.get("birth_date"),
+            )
+            if person in dead_profile:
+                sweetify.error(
                     request,
-                    "The UID you inputted is already registered to your account.",
+                    "The person you inputted is already registered to your account.",
+                    persistent=":(",
                 )
                 return redirect("create-dead")
-        except ObjectDoesNotExist:
-            messages.error(
-                request, "The UID you inputted was not found in our database."
+        except MasterData_Revised.DoesNotExist:
+            sweetify.error(
+                request,
+                "The person you inputted was not found in our database please try again.",
+                persistent=":(",
             )
-        # if form.is_valid():
-        #     dead = form.save(commit=False)
-        #     dead.user = request.user
-        #     dead.uid = MasterData_Revised.objects.get(uid=uid)
-        #     dead.save()
-        #     return redirect("profile")
+            return redirect("create-dead")
+        instance = User_Place(uid=person)
+        instance.user = request.user
+        instance.save()
+        return redirect("profile")
     else:
         form = EventForm()
     context = {"form": form}
@@ -203,7 +211,7 @@ def get_cemetery(place):
         final_place = "MS"
     elif place == "La Loma C":
         final_place = "L"
-    elif place == "	Manila Chinese C":
+    elif place == " Manila Chinese C":
         final_place = "MC"
     return final_place
 
