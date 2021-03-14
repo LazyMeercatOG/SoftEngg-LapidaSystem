@@ -38,9 +38,9 @@
                         <form method="POST" action="">
                   <select class="form-select" name="uid" aria-label="Default select example" required>
                   <option selected disabled value ="">Select a Loved One</option>
+                  {% with cemetery=""%}
                   {%for item in form%}
-                  <option value="{{item.uid}}">{{item.last_name}}, {{item.first_name}} {{item.middle_name}}</option>
-                  
+                  <option value="{{item.uid}}" {% if item.uid == uid %} cemetery=item.place selected{% endif %}>{{item.last_name}}, {{item.first_name}} {{item.middle_name}}</option>
                   {%endfor%}
                 </select>
                     </div>
@@ -48,6 +48,8 @@
                 <div class="card shadow border-0 mb-5">
                     <div class="card-body p-5">
                         <h2 class="h4 mb-1">Pick a Service</h2>
+                                   <p> {{cemetery}} </p>
+                                          {%endwith%}
 <!--                          {%for place in cemeteries%}
                          <p> {{place}} </p>
                          {%endfor%} -->
@@ -97,7 +99,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item rounded-0 d-flex align-items-center justify-content-between">
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" id="customCheck1" type="checkbox" name="customRadio" value="Wreath" checked>
+                                        <input class="custom-control-input" id="customCheck1" type="checkbox"  value="Wreath" checked>
                                         <label class="custom-control-label" for="customCheck1">
                                             <p class="mb-0">Gravestone Care - ₱1000</p><span class="small font-italic text-muted">Cleansing of dirt and other artifacts alongside the re-establishing of the gravestone foundation.</span>
                                         </label>
@@ -106,7 +108,7 @@
                                 </li>
                                 <li class="list-group-item d-flex align-items-center justify-content-between">
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" id="customCheck2" type="checkbox" name="customRadio" value="Classic" checked>
+                                        <input class="custom-control-input" id="customCheck2" type="checkbox" value="Classic" checked>
                                         <label class="custom-control-label" for="customCheck2">
                                             <p class="mb-0">Landscape Care - ₱1000</p><span class="small font-italic text-muted">Extensive maintenance of the land surrounding the gravestone.</span>
                                         </label>
@@ -214,12 +216,14 @@
                   <div>
                     <strong>Total amount</strong>
                   </div>
-                    <div class="totalpay" id="totalpay">
+                    <div class="totalpay" id="totalpay" name="totalpay">
 
                     </div>
                 </li>
               </ul>
               <button type="Submit" class="btn btn-primary btn-block">Proceed to Checkout</button>
+              <input type="hidden" value="" id="cat_id" name="cat_id" />
+              <input type="hidden" value="" id="summary" name="summary" />
               </form>
             </div>
           </div>
@@ -311,6 +315,10 @@ $('#customCheck1').change(function(){
         $('#temp-d').fadeIn('slow');
         $("#totalpay").empty();
         $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        option = "Cleansing of dirt and other artifacts alongside the re-establishing of the gravestone foundation. ";
+        var current_option = $(this).attr('summary');
+        var final_option = current_option.concat(option)
+        $("#summary").val(final_option);
     }
     else{
         finalpay = finalpay - 1000;
@@ -326,7 +334,11 @@ $('#customCheck1').change(function(){
         $('#temp-d').fadeOut('slow');
         $("#totalpay").empty();
         $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        var current_option = $(this).attr('summary');
+        var final_option = current_option.replace("Cleansing of dirt and other artifacts alongside the re-establishing of the gravestone foundation. ", "")  
+        $("#summary").val(final_option);      
     }
+    $("#cat_id").val(finalpay);
 });
 
 $('#customCheck2').change(function(){
@@ -336,6 +348,10 @@ $('#customCheck2').change(function(){
         $('#temp-e').fadeIn('slow');
         $("#totalpay").empty();
         $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        option = "Extensive maintenance of the land surrounding the gravestone. ";
+        var current_option = $(this).attr('summary');
+        var final_option = current_option.concat(option)
+        $("#summary").val(final_option);
     }
     else{
         finalpay = finalpay - 1000;
@@ -351,7 +367,11 @@ $('#customCheck2').change(function(){
         $('#temp-e').fadeOut('slow');
         $("#totalpay").empty();
         $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        var current_option = $(this).attr('summary');
+        var final_option = current_option.replace("Extensive maintenance of the land surrounding the gravestone. ", "")  
+        $("#summary").val(final_option); 
     }
+$("#cat_id").val(finalpay);
 });
 
 
@@ -388,6 +408,7 @@ $('#customCheck6').change(function(){
             $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
         }
     }
+    $("#cat_id").val(finalpay);
 });
 
 $('#customCheck7').change(function(){
@@ -436,7 +457,9 @@ $('#customCheck7').change(function(){
             $("#totalpay").empty();
             $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
         }
+        
     }
+    $("#cat_id").val(finalpay);
 });
 
 $('#customCheck8').change(function(){
@@ -452,6 +475,7 @@ $('#customCheck8').change(function(){
         $("#totalpay").empty();
         $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
     }
+    $("#cat_id").val(finalpay);
 });
 
 $('#customCheck9').change(function(){
@@ -467,6 +491,7 @@ $('#customCheck9').change(function(){
         $("#totalpay").empty();
         $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
     }
+    $("#cat_id").val(finalpay);
 });
 
 $('#customRadio1').change(function(){
@@ -488,6 +513,7 @@ $('#customRadio1').change(function(){
         $("#totalpay").empty();
         $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
     }
+    $("#cat_id").val(finalpay);
 });
 
 $('#customRadio2').change(function(){
@@ -509,6 +535,7 @@ $('#customRadio2').change(function(){
         $("#totalpay").empty();
         $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
     }
+    $("#cat_id").val(finalpay);
 });
 
 $('#customRadio3').change(function(){
@@ -530,6 +557,7 @@ $('#customRadio3').change(function(){
         $("#totalpay").empty();
         $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
     }
+    $("#cat_id").val(finalpay);
 });
 
 

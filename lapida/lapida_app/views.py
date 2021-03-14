@@ -169,6 +169,7 @@ def menu(request):
         current_price = 0
         options = []
         uid = request.POST.get("uid")
+        totalpay = request.POST.get("cat_id")
         instance = Order_User(
             profile_dead=User_Place.objects.get(user=request.user, uid=uid)
         )
@@ -177,18 +178,16 @@ def menu(request):
             if check:
                 if x == 7:
                     flower = request.POST.get("customRadio")
-                    current_price = get_flower_price(flower, current_price)
                     options.append(get_flower(flower))
                 else:
                     options.append(get_options(x))
-                    current_price = get_prices(x, current_price)
         if form.is_valid():
             order_date = form.cleaned_data.get("order_date")
             instance.order_date = order_date
             note = request.POST.get("Note")
             options = "\n".join(options)
             instance.status = "P"
-            instance.price = current_price
+            instance.price = totalpay
             instance.services = options
             instance.note = note
             instance.save()
@@ -237,26 +236,6 @@ def get_flower(flower):
     elif flower == "Elegant":
         option = "Floral Arrangement: Elegant"
     return option
-
-
-def get_prices(x, current_price):
-    if x == 6:
-        price = 3000 + current_price
-    elif x == 8:
-        price = 500 + current_price
-    elif x == 9:
-        price = 1500 + current_price
-    return price
-
-
-def get_flower_price(flower, current_price):
-    if flower == "Wreath":
-        price = 3000 + current_price
-    elif flower == "Classic":
-        price = 4000 + current_price
-    elif flower == "Elegant":
-        price = 6600 + current_price
-    return price
 
 
 @login_required(login_url="login")
