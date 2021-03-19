@@ -8,12 +8,19 @@
 {% load define_action %}
 <!-- Demo header-->
 <head>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-      <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-      <link href="{% static 'lapida_app/menu/menu.css' %}" rel="stylesheet">
-      <link href="{% static 'lapida_app/menu/css/gijgo.min.css' %}" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+            crossorigin="anonymous">
+    </script>
+    <script src="jquery.nice-number.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{% static 'lapida_app/menu/menu.css' %}" rel="stylesheet">
+    <link href="{% static 'lapida_app/menu/css/gijgo.min.css' %}" rel="stylesheet">
+    <link href="jquery.nice-number.css" rel="stylesheet">
+
 
 </head>
 <section class="py-5 header text-center text-white">
@@ -47,12 +54,12 @@
                 </div>
                 <div class="card shadow border-0 mb-5">
                     <div class="card-body p-5">
-                        <h2 class="h4 mb-1">Pick a Service</h2>
                                    <p> {{cemetery}} </p>
                                           {%endwith%}
 <!--                          {%for place in cemeteries%}
                          <p> {{place}} </p>
                          {%endfor%} -->
+                        <h2 class="h4 mb-1">Pick a Service</h2>
                         <p class="small text-muted font-italic mb-4">You can pick any number of services to avail.</p>
                             {% csrf_token %}
                         <ul class="list-group mx-auto">
@@ -177,6 +184,38 @@
                     </div>
                 </div>
 
+                <div id="candlecard" class="checkout">
+                    <div class="card shadow border-0 mb-5">
+                        <div class="card-body p-5">
+                            <h2 class="h4 mb-1">Customize your Candle Options</h2>
+                            <ul class="list-group mx-auto">
+                                <li class="list-group-item d-flex align-items-center justify-content-between">
+                                    <div class="custom-control">
+                                        <label>
+                                            <p class="mb-0">Candle Type 1</p><span class="small font-italic text-muted">Desc 1</span>
+                                        </label>
+                                        <div style="width: 125px">
+                                            <input id="candle1" type="number" value="0" min="0" max="10"/>
+                                        </div>
+                                    </div>
+                                    <label for="customRadio3"><img src="../../static/lapida_app/menu/images/candle1.png" alt="" width="60"></label>
+                                </li>
+                                <li class="list-group-item d-flex align-items-center justify-content-between">
+                                    <div class="custom-control">
+                                        <label>
+                                            <p class="mb-0">Candle Type 2</p><span class="small font-italic text-muted">Desc 2</span>
+                                        </label>
+                                        <div style="width: 125px">
+                                            <input id="candle2" type="number" value="0" min="0" max="10"/>
+                                        </div>
+                                    </div>
+                                    <label for="customRadio3"><img src="../../static/lapida_app/menu/images/candle2.png" alt="" width="60"></label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
 <div id="checkout" class="checkout">
     <div class="card shadow border-0 mb-5">
 
@@ -237,10 +276,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <script src="{% static 'lapida_app/menu/js/gijgo.min.js' %}" charset="utf-8"></script>
+    <script src="{% static 'lapida_app/menu/spinner/src/input-spinner.js' %}"></script>
 
     <script type="text/javascript">
 
 $(document).ready(function(){
+
+$('input[type=number]').inputSpinner();
 
 $('#datepicker').datepicker();
 var finalpay = 0;
