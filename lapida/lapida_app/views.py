@@ -160,9 +160,7 @@ def menu(request):
         dead_profile.append(person_dead)
         cemeteries.append(person_dead.place)
     if not dead_profile:
-        messages.error(
-            request, "Please register a profile of your loved one first."
-        )
+        messages.error(request, "Please register a profile of your loved one first.")
         return redirect("create-dead")
     context = {"form": dead_profile, "order": form, "cemeteries": cemeteries}
     if request.method == "POST":
@@ -191,9 +189,7 @@ def menu(request):
             instance.services = options
             instance.note = note
             instance.save()
-            profile_dead = MasterData_Revised.objects.get(
-                uid=instance.profile_dead.uid
-            )
+            profile_dead = MasterData_Revised.objects.get(uid=instance.profile_dead.uid)
             dead_place = get_cemetery(profile_dead.place)
             caretaker_profile = CareTaker.objects.filter(cemetery=dead_place)
             caretaker_p = []
@@ -259,9 +255,7 @@ def profile(request):
         except ObjectDoesNotExist:
             pass
     if not dead_profile:
-        messages.error(
-            request, "Please register a profile of your loved one first."
-        )
+        messages.error(request, "Please register a profile of your loved one first.")
         return redirect("create-dead")
     context = {"form": dead_profile, "order_user": order_user}
     return render(request, "lapida_app/profile.html", context)
@@ -314,9 +308,7 @@ def export(request):
     # response['Content-Disposition'] = 'attachment; filename="member.csv"'
     # response = HttpResponse(dataset.json, content_type='application/json')
     # response['Content-Disposition'] = 'attachment; filename="persons.json"'
-    response = HttpResponse(
-        dataset.xls, content_type="application/vnd.ms-excel"
-    )
+    response = HttpResponse(dataset.xls, content_type="application/vnd.ms-excel")
     response["Content-Disposition"] = 'attachment; filename="persons.xls"'
     return response
 

@@ -4,6 +4,9 @@ from phonenumber_field.modelfields import PhoneNumberField
 from datetime import datetime
 
 
+User._meta.get_field("email")._unique = True
+
+
 STORAGE_CHOICES = (
     ("C", "Cemetery"),
     ("CO", "Columbarium"),
