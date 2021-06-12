@@ -23,9 +23,9 @@
                 <p class="mb-0"><b>Note:</b> {{form.note}}</p>
                 {%endif%}
             </div><!-- / project-info-box -->
-            {%if form.status == "P" %}
+            {%if form.status == "P" and form.status != "Ca" %}
             <div class="project-info-box mt-0 mb-0">
-                            <a href="" order_id="{{form.id}}" class="btn btn-success btn-lg ddf"> Cancel
+                            <a href="" order_id="{{form.id}}" class="btn btn-danger btn-lg ddf"> Cancel
                             </a>
     <!-- Set up a container element for the button -->
     <div id="paypal-button-container"></div>

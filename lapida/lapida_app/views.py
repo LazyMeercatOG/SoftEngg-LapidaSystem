@@ -302,6 +302,7 @@ def update_status(request, id):
 
 
 def cancel_request(request, id):
+    print("AAA")
     order = Order_User.objects.get(id=id)
     order.status = "Ca"
     order.save()
