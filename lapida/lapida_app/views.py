@@ -164,8 +164,14 @@ def menu(request):
         return redirect("create-dead")
     context = {"form": dead_profile, "order": form, "cemeteries": cemeteries}
     if request.method == "POST":
-        current_price = 0
+        id_to_check = ["graveCheck", "flowerCheck", "candleCheck", "prayerCheck"]
         options = []
+        for id in id_to_check:
+            if request.POST.get(id):
+                value = get_value_of_user_choices(request, id)
+                options.append(value)
+        current_price = 0
+
         uid = request.POST.get("uid")
         totalpay = request.POST.get("cat_id")
         instance = Order_User(
@@ -200,6 +206,20 @@ def menu(request):
             caretaker_task_instance.save()
             return redirect("summary", instance.id)
     return render(request, "lapida_app/menu.html", context)
+
+
+def get_value_of_user_choices(request, id):
+    if id == "graveCheck":
+        option = ""
+        if request.POST.get("gravecareCheck"):
+            option += "Gravestone Care - ₱1000\n"
+        if request.POST.get("landscapeCheck"):
+            option += "Gravestone Care - ₱1000\n"
+        return option
+    elif id == "flowerCheck":
+        option = ""
+        if request.POST.get("flowerSelect"):
+            id_to_check = ["graveCheck", "flowerCheck", "candleCheck", "prayerCheck"]
 
 
 def get_cemetery(place):

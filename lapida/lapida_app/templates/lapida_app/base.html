@@ -1,94 +1,128 @@
-{%load static%}
-
+{%load static%} {% load auth_extras %}
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Haven's Memory</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
 
-  <title>Haven's Memory</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="{% static 'lapida_app/index/img/dove.png' %}" rel="icon" />
+    <link
+      href="{% static 'lapida_app/index/img/dove.png' %}"
+      rel="apple-touch-icon"
+    />
+    <link
+      href="{% static 'lapida_app/index/vendor/icofont/icofont.min.css' %}"
+      rel="stylesheet"
+    />
 
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
 
-  <!-- Favicons -->
-  <link href="{% static 'lapida_app/index/img/dove.png' %}" rel="icon">
-  <link href="{% static 'lapida_app/index/img/dove.png' %}" rel="apple-touch-icon">
-  <link href="{% static 'lapida_app/index/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
- 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="{% static 'lapida_app/index/vendor/aos/aos.css' %}" rel="stylesheet">
-  <link href="{% static 'lapida_app/index/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'lapida_app/index/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-  <link href="{% static 'lapida_app/index/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
-  <link href="{% static 'lapida_app/index/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
-  <link href="{% static 'lapida_app/index/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-      <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- Vendor CSS Files -->
+    <link
+      href="{% static 'lapida_app/index/vendor/aos/aos.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'lapida_app/index/vendor/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'lapida_app/index/vendor/bootstrap-icons/bootstrap-icons.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'lapida_app/index/vendor/boxicons/css/boxicons.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'lapida_app/index/vendor/glightbox/css/glightbox.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'lapida_app/index/vendor/swiper/swiper-bundle.min.css' %}"
+      rel="stylesheet"
+    />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-  <!-- Template Main CSS File -->
-  <link href="{% static 'lapida_app/index/css/main.css' %}" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-  <!-- =======================================================
+    <!-- Template Main CSS File -->
+    <link
+      href="{% static 'lapida_app/index/css/main.css' %}"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- =======================================================
   * Template Name: Day - v4.0.1
   * Template URL: https://bootstrapmade.com/day-multipurpose-html-template-for-free/
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-</head>
+  </head>
 
-<body>
-
-
-  <!-- ======= Top Bar ======= -->
-  {%if user.is_authenticated%}
-  <section id="topbar" class="d-flex align-items-center">
-    <div class="container d-flex justify-content-center justify-content-md-between">
-      <div class="contact-info d-flex align-items-center">
-        {%if user.is_authenticated%}
-        <a href="{% url 'profile'%}">
-        <i class="icofont-user"></i>{{request.user.username}}
-        </a> 
-        {%endif%}
-      </div>
-      <div class="social-links d-none d-md-block">
-<!--        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>-->
-<!--        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>-->
-<!--        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>-->
-<!--        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>-->
-      </div>
-    </div>
-  </section>
-  {%endif%}
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="d-flex align-items-center">
-    <div class="container d-flex align-items-center justify-content-between">
-
-      <h1 class="logo"><a href="{% url 'home-view'%}">Haven's Memory</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="{% static 'lapida_app/index/img/logo.png' %}" alt="" class="img-fluid"></a>-->
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          {% if request.path == '/'%}
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          {% endif %}
-          <!---<li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li> --->
-          {%if user.is_authenticated%}
-          <li><a href="{%url 'logout'%}">Logout</a></li>
-          {%else%}
-          <li><a href="{%url 'login'%}">Login</a></li>
-          <li><a href="{%url 'register'%}">Signup</a></li>
+  <body>
+    <!-- ======= Top Bar ======= -->
+    {%if user.is_authenticated%}
+    <section id="topbar" class="d-flex align-items-center">
+      <div
+        class="
+          container
+          d-flex
+          justify-content-center justify-content-md-between
+        "
+      >
+        <div class="contact-info d-flex align-items-center">
+          {% if request.user|has_group:"customer" %}
+          <a href="{% url 'profile'%}">
+            <i class="icofont-user"></i>{{request.user.username}}
+          </a>
+          {% elif request.user|has_group:"caretaker" %}
+          <a href="{% url 'home-view'%}">
+            <i class="icofont-user"></i>{{request.user.username}}
+          </a>
           {%endif%}
-          <!---<li><a class="nav-link scrollto" href="#team">Team</a></li> ---> 
-         <!--- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+        </div>
+        <div class="social-links d-none d-md-block">
+          <!--        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>-->
+          <!--        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>-->
+          <!--        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>-->
+          <!--        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>-->
+        </div>
+      </div>
+    </section>
+    {%endif%}
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="d-flex align-items-center">
+      <div class="container d-flex align-items-center justify-content-between">
+        <h1 class="logo"><a href="{% url 'home-view'%}">Haven's Memory</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo"><img src="{% static 'lapida_app/index/img/logo.png' %}" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar">
+          <ul>
+            {% if request.path == '/'%}
+            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+            <li><a class="nav-link scrollto" href="#about">About</a></li>
+            <li><a class="nav-link scrollto" href="#services">Services</a></li>
+            <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+            {% endif %}
+            <!---<li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li> --->
+            {%if user.is_authenticated%}
+            <li><a href="{%url 'logout'%}">Logout</a></li>
+            {%else%}
+            <li><a href="{%url 'login'%}">Login</a></li>
+            <li><a href="{%url 'register'%}">Signup</a></li>
+            {%endif%}
+            <!---<li><a class="nav-link scrollto" href="#team">Team</a></li> --->
+            <!--- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
@@ -105,28 +139,32 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
-          ---> 
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+          --->
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
+      </div>
+    </header>
+    <!-- End Header -->
+    {%block content%} {%endblock%}
 
-    </div>
-  </header><!-- End Header -->
-  {%block content%}
-  {%endblock%}
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+    <div id="preloader"></div>
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-  <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="{% static 'lapida_app/index/vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'lapida_app/index/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'lapida_app/index/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'lapida_app/index/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'lapida_app/index/vendor/php-email-form/validate.js' %}"></script>
+    <script src="{% static 'lapida_app/index/vendor/swiper/swiper-bundle.min.js' %}"></script>
 
-  <!-- Vendor JS Files -->
-  <script src="{% static 'lapida_app/index/vendor/aos/aos.js' %}"></script>
-  <script src="{% static 'lapida_app/index/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'lapida_app/index/vendor/glightbox/js/glightbox.min.js' %}"></script>
-  <script src="{% static 'lapida_app/index/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
-  <script src="{% static 'lapida_app/index/vendor/php-email-form/validate.js' %}"></script>
-  <script src="{% static 'lapida_app/index/vendor/swiper/swiper-bundle.min.js' %}"></script>
-
-  <!-- Template Main JS File -->
-  <script src="{% static 'lapida_app/index/js/main.js' %}"></script>
-</body>
+    <!-- Template Main JS File -->
+    <script src="{% static 'lapida_app/index/js/main.js' %}"></script>
+  </body>
 </html>
