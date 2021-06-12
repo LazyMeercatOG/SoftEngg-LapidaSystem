@@ -131,54 +131,56 @@
                     <div class="card shadow border-0 mb-5">
                         <div class="card-body p-5">
                             <h2 class="h4 mb-1">Choose the Flower Shop</h2>
-                            <select class="form-select" name="flowerselect" id="flowerselect" aria-label="Default select example" required>
+                            <select class="form-select" name="flowerSelect" id="flowerSelect" aria-label="Default select example" required>
                                 <option selected disabled ="">Select among the choices</option>
-                                <option>Citifora Flowers</option>
-                                <option>Gertudes Flowershop</option>
-                                <option>Raphael's Gifts</option>
-                                <option>La Rose</option>
+                                <option value="citifora">Citifora Flowers</option>
+                                <option value="gertudes">Gertudes Flowershop</option>
+                                <option value="raphael">Raphael's Gifts</option>
+                                <option value="larose">La Rose</option>
                             </select>
                             </br>
                             <h2 class="h4 mb-1" id="arrangementtext">Choose the Type of Flower Arrangement</h2>
-                            <ul class="list-group" id="citiforagroup">
-                                <li class="list-group-item rounded-0 d-flex align-items-center justify-content-between">
-                                    <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" id="citiforaRadio1" type="radio" name="citiforaRadio" value="Citifora1" checked>
-                                        <label class="custom-control-label" for="citiforaRadio1">
-                                            <p class="mb-0">SYM-70 - ₱3490</p><span class="small font-italic text-muted">A coffin spray arrangement of orchids and casa blanca, along with fillers. Sympathy flowers in a basket.</span>
-                                        </label>
-                                    </div>
-                                    <label for="citiforaRadio1"><img src="../../static/lapida_app/menu/images/citifora1.jpg" alt="" width="60"></label>
-                                </li>
-                                <li class="list-group-item d-flex align-items-center justify-content-between">
-                                    <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" id="citiforaRadio2" type="radio" name="citiforaRadio" value="Citifora2">
-                                        <label class="custom-control-label" for="citiforaRadio2">
-                                            <p class="mb-0">SYM-72 - ₱3490</p><span class="small font-italic text-muted">A coffin spray arrangement of orchids and tuberoses, along with fillers. Send sympathy flowers to convey your sorrow for the loss of a loved one.</span>
-                                        </label>
-                                    </div>
-                                    <label for="citiforaRadio2"><img src="../../static/lapida_app/menu/images/citifora2.jpg" alt="" width="60"></label>
-                                </li>
-                                <li class="list-group-item d-flex align-items-center justify-content-between">
-                                    <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" id="citiforaRadio3" type="radio" name="citiforaRadio" value ="Citifora3">
-                                        <label class="custom-control-label" for="citiforaRadio3">
-                                            <p class="mb-0">SYM-73 - ₱3000</p><span class="small font-italic text-muted">A coffin spray arrangement of cattleya orchids, along with fillers. Pick this one because it's the cheapest!</span>
-                                        </label>
-                                    </div>
-                                    <label for="citiforaRadio3"><img src="../../static/lapida_app/menu/images/citifora3.jpg" alt="" width="60"></label>
-                                </li>
-                                <li class="list-group-item d-flex align-items-center justify-content-between">
-                                    <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" id="citiforaRadio4" type="radio" name="citiforaRadio" value ="Citifora4">
-                                        <label class="custom-control-label" for="citiforaRadio4">
-                                            <p class="mb-0">SYM-82 - ₱3490</p><span class="small font-italic text-muted">A basket spray arrangement of cattleya orchids and mums. A combination of white flowers in a basket.</span>
-                                        </label>
-                                    </div>
-                                    <label for="citiforaRadio4"><img src="../../static/lapida_app/menu/images/citifora4.jpg" alt="" width="60"></label>
-                                </li>
-                            </ul>
-                            <ul class="list-group" id="gertudesgroup">
+                            <div name="citiforagroup" id="citiforagroup">
+                                <ul class="list-group">
+                                    <li class="list-group-item rounded-0 d-flex align-items-center justify-content-between">
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" id="citiforaRadio1" type="radio" name="citiforaRadio" value="Citifora1" checked>
+                                            <label class="custom-control-label" for="citiforaRadio1">
+                                                <p class="mb-0">SYM-70 - ₱3490</p><span class="small font-italic text-muted">A coffin spray arrangement of orchids and casa blanca, along with fillers. Sympathy flowers in a basket.</span>
+                                            </label>
+                                        </div>
+                                        <label for="citiforaRadio1"><img src="../../static/lapida_app/menu/images/citifora1.jpg" alt="" width="60"></label>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center justify-content-between">
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" id="citiforaRadio2" type="radio" name="citiforaRadio" value="Citifora2">
+                                            <label class="custom-control-label" for="citiforaRadio2">
+                                                <p class="mb-0">SYM-72 - ₱3490</p><span class="small font-italic text-muted">A coffin spray arrangement of orchids and tuberoses, along with fillers. Send sympathy flowers to convey your sorrow for the loss of a loved one.</span>
+                                            </label>
+                                        </div>
+                                        <label for="citiforaRadio2"><img src="../../static/lapida_app/menu/images/citifora2.jpg" alt="" width="60"></label>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center justify-content-between">
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" id="citiforaRadio3" type="radio" name="citiforaRadio" value ="Citifora3">
+                                            <label class="custom-control-label" for="citiforaRadio3">
+                                                <p class="mb-0">SYM-73 - ₱3000</p><span class="small font-italic text-muted">A coffin spray arrangement of cattleya orchids, along with fillers. Pick this one because it's the cheapest!</span>
+                                            </label>
+                                        </div>
+                                        <label for="citiforaRadio3"><img src="../../static/lapida_app/menu/images/citifora3.jpg" alt="" width="60"></label>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center justify-content-between">
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" id="citiforaRadio4" type="radio" name="citiforaRadio" value ="Citifora4">
+                                            <label class="custom-control-label" for="citiforaRadio4">
+                                                <p class="mb-0">SYM-82 - ₱3490</p><span class="small font-italic text-muted">A basket spray arrangement of cattleya orchids and mums. A combination of white flowers in a basket.</span>
+                                            </label>
+                                        </div>
+                                        <label for="citiforaRadio4"><img src="../../static/lapida_app/menu/images/citifora4.jpg" alt="" width="60"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <ul class="list-group" name="gertudesgroup" id="gertudesgroup">
                                 <li class="list-group-item rounded-0 d-flex align-items-center justify-content-between">
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" id="gertudesRadio1" type="radio" name="gertudesRadio" value="Gertudes1" checked>
@@ -225,7 +227,7 @@
                                     <label for="gertudesRadio5"><img src="../../static/lapida_app/menu/images/gertudes5.jpg" alt="" width="60"></label>
                                 </li>
                             </ul>
-                            <ul class="list-group" id="raphaelgroup">
+                            <ul class="list-group" name="raphaelgroup" id="raphaelgroup">
                                 <li class="list-group-item rounded-0 d-flex align-items-center justify-content-between">
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" id="raphaelRadio1" type="radio" name="raphaelRadio" value="Raphael1" checked>
@@ -254,7 +256,7 @@
                                     <label for="raphaelRadio3"><img src="../../static/lapida_app/menu/images/raphael3.jpg" alt="" width="60"></label>
                                 </li>
                             </ul>
-                            <ul class="list-group" id="larosegroup">
+                            <ul class="list-group" name="larosegroup" id="larosegroup">
                                 <li class="list-group-item rounded-0 d-flex align-items-center justify-content-between">
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" id="laroseRadio1" type="radio" name="laroseRadio" value="Larose1" checked>
@@ -444,7 +446,7 @@ $('#flowercard').hide();
 $('#datepickercard').hide();
 $('#notecard').hide();
 $('#candlecard').hide();
-$('#gravesiteheader, #floralheader, #flowerprices, #gravestoneprice, #landscapeprice, #candleprice, #prayerprice').hide();
+$('#gravesiteheader, #floralheader, #flowerprices, #citiforagroup, #gertudesgroup, #raphaelgroup, #larosegroup, #arrangementtext, #gravestoneprice, #landscapeprice, #candleprice, #prayerprice').hide();
 
 $('#candleCheck, #prayerCheck').change(function(){
 if($('#graveCheck, #flowerCheck, #candleCheck, #prayerCheck').is(':checked')){
@@ -602,6 +604,34 @@ $('#graveCheck').change(function(){
     }
     $("#cat_id").val(finalpay);
 });
+
+$('#flowerSelect').change(function(){
+    if(this.value == "citifora"){
+        $('#citiforagroup').fadeIn('slow');
+        $('#gertudesgroup').hide();
+        $('#raphaelgroup').hide();
+        $('#larosegroup').hide();
+    }
+    else if(this.value == "gertudes"){
+        $('#gertudesgroup').fadeIn('slow');
+        $('#citiforagroup').hide();
+        $('#raphaelgroup').hide();
+        $('#larosegroup').hide();
+    }
+    else if(this.value == "raphael"){
+        $('#raphaelgroup').fadeIn('slow');
+        $('#citiforagroup').hide();
+        $('#gertudesgroup').hide();
+        $('#larosegroup').hide();
+    }
+    else if(this.value == "larose"){
+        $('#larosegroup').fadeIn('slow');
+        $('#citiforagroup').hide();
+        $('#gertudesgroup').hide();
+        $('#raphaelgroup').hide();
+    }
+});
+
 
 $('#flowerCheck').change(function(){
     if($('#flowerCheck').is(':checked')){
