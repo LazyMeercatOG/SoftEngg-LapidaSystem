@@ -301,6 +301,13 @@ def update_status(request, id):
     context = {"form": order}
 
 
+def cancel_request(request, id):
+    order = Order_User.objects.get(id=id)
+    order.status = "Ca"
+    order.save()
+    context = {"form": order}
+
+
 def export(request):
     member_resource = MasterData_RevisedResource()
     dataset = member_resource.export()

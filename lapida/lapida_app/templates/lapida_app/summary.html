@@ -25,6 +25,8 @@
             </div><!-- / project-info-box -->
             {%if form.status == "P" %}
             <div class="project-info-box mt-0 mb-0">
+                            <a href="" order_id="{{form.id}}" class="btn btn-success btn-lg ddf"> Cancel
+                            </a>
     <!-- Set up a container element for the button -->
     <div id="paypal-button-container"></div>
                 </p>
@@ -173,6 +175,53 @@ $(function() {
     swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
       text: "You're updating the status of this order to the next step (Paid -> Ongoing -> Completed)",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, update it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Updated!',
+          'Your task has been updated!',
+          'success'
+        ).then(function(){ 
+    $.get( url, function( data ) { 
+  });
+    location.href = url_href
+   });
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your request is cancelled. :)',
+          'error'
+        )
+      }
+    })
+     
+      
+});
+
+    $('.ddf').click(function (e) {
+      e.preventDefault();
+      var tthis = $(this);
+      var usersid =  $(this).attr("order_id");
+      var url = "{% url 'cancel-status' id=1 %}".replace('1', usersid);
+      var url_href = "{% url 'summary' id=1 %}".replace('1', usersid);
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You're updating the status of this order to Cancel",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, update it!',
