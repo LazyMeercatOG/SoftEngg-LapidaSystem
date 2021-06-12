@@ -31,9 +31,6 @@
     <div id="paypal-button-container"></div>
                 </p>
             </div><!-- / project-info-box -->
-            {%else%}
-            <div class="project-info-box mt-0 mb-0">
-            </div><!-- / project-info-box -->
   {%endif%}
 
         </div>
@@ -75,6 +72,7 @@
                 <p class="mb-0"><b>Note:</b> {{form.note}}</p>
                 {%endif%}
             </div><!-- / project-info-box -->
+{%if form.status != "Ca" %}
             <div class="col-md-13">
                         
                         <div class="project-info-box">
@@ -95,7 +93,6 @@
 
 
 
-
         <!-- / column -->
         <div class="col-md-7">
             <div class="project-info-box">
@@ -107,7 +104,7 @@
                 <p><b>Skills:</b> Illustrator</p>
             </div><!-- / project-info-box -->
         </div><!-- / column -->
-
+{%endif%}
 
     </div>
 </div>
