@@ -108,9 +108,14 @@ def register(request):
                 )
                 to_email = form.cleaned_data.get("email")
                 send_mail(mail_subject, message, EMAIL_HOST_USER, [to_email])
-                return HttpResponse(
-                    "Please confirm your email address to complete the registration"
+                message_error_1 = None
+                sweetify.error(
+                    request,
+                    "You need to verify your account via email that we sent in order to login.",
+                    persistent=":)",
                 )
+                context = {"message_error": message_error_1}
+                return render(request, "lapida_app/login.html", context)
                 # # Auto login and once authenticated then redirect to register dead page
                 # user = authenticate(
                 #     request,
@@ -138,10 +143,15 @@ def activate(request, uidb64, token):
         user = None
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
+        message_error_1 = None
         user.save()
-        return HttpResponse(
-            "Thank you for your email confirmation. Now you can login your account."
+        sweetify.error(
+            request,
+            "Your account is activated go log in your account now!",
+            persistent=":)",
         )
+        context = {"message_error": message_error_1}
+        return render(request, "lapida_app/login.html", context)
     else:
         return HttpResponse("Activation link is invalid!")
 
@@ -214,31 +224,23 @@ def menu(request):
         return redirect("create-dead")
     context = {"form": dead_profile, "order": form, "cemeteries": cemeteries}
     if request.method == "POST":
-        id_to_check = ["graveCheck", "flowerCheck", "candleCheck", "prayerCheck"]
+        id_to_check = ["graveCheck", "flowerCheck", "prayerCheck"]
         options = []
         for id in id_to_check:
             if request.POST.get(id):
                 value = get_value_of_user_choices(request, id)
                 options.append(value)
-        current_price = 0
-
         uid = request.POST.get("uid")
         totalpay = request.POST.get("cat_id")
         instance = Order_User(
             profile_dead=User_Place.objects.get(user=request.user, uid=uid)
         )
-        for x in range(6, 10):
-            check = request.POST.get("customCheck" + str(x))
-            if check:
-                if x == 7:
-                    flower = request.POST.get("customRadio")
-                    options.append(get_flower(flower))
-                else:
-                    options.append(get_options(x))
         if form.is_valid():
             order_date = form.cleaned_data.get("order_date")
             instance.order_date = order_date
             note = request.POST.get("Note")
+            options.append("₱" + str(totalpay))
+            options.append(note)
             options = "\n".join(options)
             instance.status = "P"
             instance.price = totalpay
@@ -264,12 +266,29 @@ def get_value_of_user_choices(request, id):
         if request.POST.get("gravecareCheck"):
             option += "Gravestone Care - ₱1000\n"
         if request.POST.get("landscapeCheck"):
-            option += "Gravestone Care - ₱1000\n"
+            option += "Gravestone Care - ₱1000"
         return option
     elif id == "flowerCheck":
         option = ""
-        if request.POST.get("flowerSelect"):
-            id_to_check = ["graveCheck", "flowerCheck", "candleCheck", "prayerCheck"]
+        flower = request.POST.get("flowerSelect")
+        if flower:
+            if flower == "citifora":
+                flower_arrangement = request.POST.get("citiforaRadio")
+                option += flower_arrangement
+            elif flower == "gertudes":
+                flower_arrangement = request.POST.get("gertudesRadio")
+                option += flower_arrangement
+            elif flower == "raphael":
+                flower_arrangement = request.POST.get("raphaelRadio")
+                option += flower_arrangement
+            elif flower == "larose":
+                flower_arrangement = request.POST.get("laroseRadio")
+                option += flower_arrangement
+            return option
+    elif id == "prayerCheck":
+        option = ""
+        option += "Prayer Service and Candle Lighting - ₱1500"
+        return option
 
 
 def get_cemetery(place):
