@@ -28,8 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-if DEBUG:
-    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -78,7 +77,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "lapida.wsgi.application"
-
+AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.AllowAllUsersModelBackend"]
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -133,3 +132,11 @@ LOGIN_REDIRECT_URL = "home-view"
 IMPORT_EXPORT_USE_TRANSACTION = True
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "havensmemory@gmail.com"
+EMAIL_HOST_PASSWORD = "Support0318"  # past the key or password app here
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False

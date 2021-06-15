@@ -8,6 +8,7 @@ from django.conf.urls import handler404
 
 urlpatterns = [
     path("", views.index, name="home-view"),
+    path("activate/<uidb64>/<token>/", views.activate, name="activate"),
     path("register/", views.register, name="register"),
     path("login/", views.loginPage, name="login"),
     path("logout/", views.logoutUser, name="logout"),
