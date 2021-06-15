@@ -22,6 +22,14 @@ from .models import (
 from .resources import MasterData_RevisedResource
 from django.core.exceptions import ObjectDoesNotExist
 import sweetify
+from django.core.mail import send_mail
+from .tokens import account_activation_token
+from django.contrib.auth import get_user_model
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes, force_text
+from lapida.settings import EMAIL_HOST_USER
 
 
 def index(request):
@@ -44,8 +52,16 @@ def loginPage(request):
             password = request.POST.get("password")
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                login(request, user)
-                return redirect("home-view")
+                if user.is_active:
+                    login(request, user)
+                    return redirect("home-view")
+                else:
+                    message_error_1 = None
+                    sweetify.error(
+                        request,
+                        "Your account is not activated yet please check your email for the verification link",
+                        persistent=":(",
+                    )
             else:
                 message_error = messages.info(
                     request, "Username or Password is incorrect"
@@ -71,29 +87,63 @@ def register(request):
             gender = request.POST.get("gender")
             form_1.gender = gender
             if form.is_valid() and form_1.is_valid():
-                user = form.save()
+                user = form.save(commit=False)
+                user.is_active = False
+                user.save()
                 form_1 = form_1.save(commit=False)
                 group = Group.objects.get(name="customer")
                 user.groups.add(group)
                 form_1.user = user
                 form_1.save()
-                # Auto login and once authenticated then redirect to register dead page
-                user = authenticate(
-                    request,
-                    username=form.cleaned_data["username"],
-                    password=form.cleaned_data["password1"],
+                current_site = get_current_site(request)
+                mail_subject = "Activate your account."
+                message = render_to_string(
+                    "lapida_app/verification.html",
+                    {
+                        "user": user,
+                        "domain": current_site.domain,
+                        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                        "token": account_activation_token.make_token(user),
+                    },
                 )
-                if user is not None:
-                    login(request, user)
-                    return redirect("create-dead")
+                to_email = form.cleaned_data.get("email")
+                send_mail(mail_subject, message, EMAIL_HOST_USER, [to_email])
+                return HttpResponse(
+                    "Please confirm your email address to complete the registration"
+                )
+                # # Auto login and once authenticated then redirect to register dead page
+                # user = authenticate(
+                #     request,
+                #     username=form.cleaned_data["username"],
+                #     password=form.cleaned_data["password1"],
+                # )
+                # if user is not None:
+                #     login(request, user)
+                #     return redirect("create-dead")
         else:
             form = CreateUserForm()
             form_1 = ProfileForm()
             for msg in form.error_messages:
                 messages.error(request, f"{msg}: {form.error_messages[msg]}")
-                print(msg)
         context = {"form": form, "form_1": form_1}
         return render(request, "lapida_app/register.html", context)
+
+
+def activate(request, uidb64, token):
+    User = get_user_model()
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        return HttpResponse(
+            "Thank you for your email confirmation. Now you can login your account."
+        )
+    else:
+        return HttpResponse("Activation link is invalid!")
 
 
 @login_required(login_url="login")
