@@ -605,6 +605,8 @@ $('#graveCheck').change(function(){
     $("#cat_id").val(finalpay);
 });
 
+// Flower Select Change
+
 
 $('#flowerSelect').change(function(){
     if(this.value == "citifora"){
@@ -617,17 +619,37 @@ $('#flowerSelect').change(function(){
         $('#notecard').fadeIn('slow');
         $('#checkout').fadeIn('slow');
 
+        if(flowerselectprevrad == 2){
+            if($('#gertudesRadio1').is(':checked'))
+                finalpay = finalpay - 1500;
+            else if($('#gertudesRadio2').is(':checked'))
+                finalpay = finalpay - 1500;
+            else if($('#gertudesRadio3').is(':checked'))
+                finalpay = finalpay - 1700;
+            else if($('#gertudesRadio4').is(':checked'))
+                finalpay = finalpay - 2500;
+            else if($('#gertudesRadio5').is(':checked'))
+                finalpay = finalpay - 4500;
+        }
+        else if (flowerselectprevrad == 3){
+            if($('#raphaelRadio1').is(':checked'))
+                finalpay = finalpay - 4990;
+            else if($('#raphaelRadio2').is(':checked'))
+                finalpay = finalpay - 1990;
+            else if($('#raphaelRadio3').is(':checked'))
+                finalpay = finalpay - 9990;
+        }
+        else if (flowerselectprevrad == 4){
+            if($('#laroseRadio1').is(':checked'))
+                finalpay = finalpay - 7500;
+            else if($('#laroseRadio2').is(':checked'))
+                finalpay = finalpay - 2500;
+        }
+
         $("#citiforaRadio1").prop("checked", true);
         $("#gertudesRadio1").prop("checked", true);
         $("#raphaelRadio1").prop("checked", true);
         $("#laroseRadio1").prop("checked", true);
-
-        if(flowerselectprevrad == 2)
-            finalpay = finalpay - 1500;
-        else if (flowerselectprevrad == 3)
-            finalpay = finalpay - 4990;
-        else if (flowerselectprevrad == 4)
-            finalpay = finalpay - 7500;
 
         flowerselectprevrad = 1;
         
@@ -650,17 +672,35 @@ $('#flowerSelect').change(function(){
         $('#notecard').fadeIn('slow');
         $('#checkout').fadeIn('slow');
 
+        if(flowerselectprevrad == 1){
+            if($('#citiforaRadio1').is(':checked'))
+                finalpay = finalpay - 3490;
+            else if($('#citiforaRadio2').is(':checked'))
+                finalpay = finalpay - 3490;
+            else if($('#citiforaRadio3').is(':checked'))
+                finalpay = finalpay - 3000;
+            else if($('#citiforaRadio4').is(':checked'))
+                finalpay = finalpay - 3490;
+        }
+        else if (flowerselectprevrad == 3){
+            if($('#raphaelRadio1').is(':checked'))
+                finalpay = finalpay - 4990;
+            else if($('#raphaelRadio2').is(':checked'))
+                finalpay = finalpay - 1990;
+            else if($('#raphaelRadio3').is(':checked'))
+                finalpay = finalpay - 9990;
+        }
+        else if (flowerselectprevrad == 4){
+            if($('#laroseRadio1').is(':checked'))
+                finalpay = finalpay - 7500;
+            else if($('#laroseRadio2').is(':checked'))
+                finalpay = finalpay - 2500;
+        }
+
         $("#citiforaRadio1").prop("checked", true);
         $("#gertudesRadio1").prop("checked", true);
         $("#raphaelRadio1").prop("checked", true);
         $("#laroseRadio1").prop("checked", true);
-
-        if(flowerselectprevrad == 1)
-            finalpay = finalpay - 3490;
-        else if (flowerselectprevrad == 3)
-            finalpay = finalpay - 4990;
-        else if (flowerselectprevrad == 4)
-            finalpay = finalpay - 7500;
 
         flowerselectprevrad = 2;
         
@@ -683,17 +723,39 @@ $('#flowerSelect').change(function(){
         $('#notecard').fadeIn('slow');
         $('#checkout').fadeIn('slow');
 
+        if(flowerselectprevrad == 1){
+            if($('#citiforaRadio1').is(':checked'))
+                finalpay = finalpay - 3490;
+            else if($('#citiforaRadio2').is(':checked'))
+                finalpay = finalpay - 3490;
+            else if($('#citiforaRadio3').is(':checked'))
+                finalpay = finalpay - 3000;
+            else if($('#citiforaRadio4').is(':checked'))
+                finalpay = finalpay - 3490;
+        }
+        else if (flowerselectprevrad == 2){
+            if($('#gertudesRadio1').is(':checked'))
+                finalpay = finalpay - 1500;
+            else if($('#gertudesRadio2').is(':checked'))
+                finalpay = finalpay - 1500;
+            else if($('#gertudesRadio3').is(':checked'))
+                finalpay = finalpay - 1700;
+            else if($('#gertudesRadio4').is(':checked'))
+                finalpay = finalpay - 2500;
+            else if($('#gertudesRadio5').is(':checked'))
+                finalpay = finalpay - 4500;
+        }
+        else if (flowerselectprevrad == 4){
+            if($('#laroseRadio1').is(':checked'))
+                finalpay = finalpay - 7500;
+            else if($('#laroseRadio2').is(':checked'))
+                finalpay = finalpay - 2500;
+        }
+
         $("#citiforaRadio1").prop("checked", true);
         $("#gertudesRadio1").prop("checked", true);
         $("#raphaelRadio1").prop("checked", true);
         $("#laroseRadio1").prop("checked", true);
-
-        if(flowerselectprevrad == 1)
-            finalpay = finalpay - 3490;
-        else if (flowerselectprevrad == 2)
-            finalpay = finalpay - 1500;
-        else if (flowerselectprevrad == 4)
-            finalpay = finalpay - 7500;
 
         flowerselectprevrad = 3;
 
@@ -715,17 +777,41 @@ $('#flowerSelect').change(function(){
         $('#notecard').fadeIn('slow');
         $('#checkout').fadeIn('slow');
 
+        if(flowerselectprevrad == 1){
+            if($('#citiforaRadio1').is(':checked'))
+                finalpay = finalpay - 3490;
+            else if($('#citiforaRadio2').is(':checked'))
+                finalpay = finalpay - 3490;
+            else if($('#citiforaRadio3').is(':checked'))
+                finalpay = finalpay - 3000;
+            else if($('#citiforaRadio4').is(':checked'))
+                finalpay = finalpay - 3490;
+        }
+        else if (flowerselectprevrad == 2){
+            if($('#gertudesRadio1').is(':checked'))
+                finalpay = finalpay - 1500;
+            else if($('#gertudesRadio2').is(':checked'))
+                finalpay = finalpay - 1500;
+            else if($('#gertudesRadio3').is(':checked'))
+                finalpay = finalpay - 1700;
+            else if($('#gertudesRadio4').is(':checked'))
+                finalpay = finalpay - 2500;
+            else if($('#gertudesRadio5').is(':checked'))
+                finalpay = finalpay - 4500;
+        }
+        else if (flowerselectprevrad == 3){
+            if($('#raphaelRadio1').is(':checked'))
+                finalpay = finalpay - 4990;
+            else if($('#raphaelRadio2').is(':checked'))
+                finalpay = finalpay - 1990;
+            else if($('#raphaelRadio3').is(':checked'))
+                finalpay = finalpay - 9990;
+        }
+
         $("#citiforaRadio1").prop("checked", true);
         $("#gertudesRadio1").prop("checked", true);
         $("#raphaelRadio1").prop("checked", true);
         $("#laroseRadio1").prop("checked", true);
-
-        if(flowerselectprevrad == 1)
-            finalpay = finalpay - 3490;
-        else if (flowerselectprevrad == 2)
-            finalpay = finalpay - 1500;
-        else if (flowerselectprevrad == 3)
-            finalpay = finalpay - 4990;
 
         flowerselectprevrad = 4;
 
@@ -741,6 +827,7 @@ $('#flowerSelect').change(function(){
 
 $('#flowerCheck').change(function(){
     if($('#flowerCheck').is(':checked')){
+        $('#floralheader').fadeIn('slow');
     }
     else{
         $('#flowerSelect').val('default').change();
@@ -748,6 +835,7 @@ $('#flowerCheck').change(function(){
         $('#gertudesgroup').hide();
         $('#raphaelgroup').hide();
         $('#larosegroup').hide();
+        $('#floralheader').hide();
     }
     $("#cat_id").val(finalpay);
 });
