@@ -394,9 +394,9 @@
                 <div id="laroseprice2">
                     <li class='list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 tab'>La Rose - Sympathy Violet Orchids Basket<span>₱2500.00</span></li>
                 </div>
-                <div id="candleprice">
+                <!-- <div id="candleprice">
                 <li class='list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0'>Candle Lights<span>₱500.00</span></li>
-                </div>
+                </div> -->
                 <div id="prayerprice">
                 <li class='list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0'>Prayer Service<span>₱1500.00</span></li>
                 </div>
@@ -902,6 +902,227 @@ $('#gertudesRadio1').change(function(){
     }
     else{
         $('#gertudesprice1').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+    $("#cat_id").val(finalpay);
+
+});
+
+$('#gertudesRadio2').change(function(){
+    if($('#gertudesRadio2').is(':checked')){
+        if(gertudesprevrad == 1)
+            finalpay = finalpay - 1500;
+        else if(gertudesprevrad == 3)
+            finalpay = finalpay - 1700;
+        else if(gertudesprevrad == 4)
+            finalpay = finalpay - 2500;
+        else if(gertudesprevrad == 5)
+            finalpay = finalpay - 4500;
+         finalpay = finalpay + 1500;
+        $('#gertudesprice2').fadeIn('slow');
+        $('#gertudesprice1').hide();
+        $('#gertudesprice3').hide();
+        $('#gertudesprice4').hide();
+        $('#gertudesprice5').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        gertudesprevrad = 2;
+    }
+    else{
+        $('#gertudesprice2').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+    $("#cat_id").val(finalpay);
+});
+
+$('#gertudesRadio3').change(function(){
+    if($('#gertudesRadio3').is(':checked')){
+        if(gertudesprevrad == 1)
+            finalpay = finalpay - 1500;
+        else if(gertudesprevrad == 2)
+            finalpay = finalpay - 1500;
+        else if(gertudesprevrad == 4)
+            finalpay = finalpay - 2500;
+        else if(gertudesprevrad == 5)
+            finalpay = finalpay - 4500;
+         finalpay = finalpay + 1700;
+        $('#gertudesprice3').fadeIn('slow');
+        $('#gertudesprice1').hide();
+        $('#gertudesprice2').hide();
+        $('#gertudesprice4').hide();
+        $('#gertudesprice5').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        gertudesprevrad = 3;
+    }
+    else{
+        $('#gertudesprice3').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+    $("#cat_id").val(finalpay);
+});
+
+$('#gertudesRadio4').change(function(){
+    if($('#gertudesRadio4').is(':checked')){
+        if(gertudesprevrad == 1)
+            finalpay = finalpay - 1500;
+        else if(gertudesprevrad == 2)
+            finalpay = finalpay - 1500;
+        else if(gertudesprevrad == 3)
+            finalpay = finalpay - 1700;
+        else if(gertudesprevrad == 5)
+            finalpay = finalpay - 4500;
+         finalpay = finalpay + 2500;
+        $('#gertudesprice4').fadeIn('slow');
+        $('#gertudesprice1').hide();
+        $('#gertudesprice2').hide();
+        $('#gertudesprice3').hide();
+        $('#gertudesprice5').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        gertudesprevrad = 4;
+    }
+    else{
+        $('#gertudesprice4').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+    $("#cat_id").val(finalpay);
+});
+
+$('#gertudesRadio5').change(function(){
+    if($('#gertudesRadio5').is(':checked')){
+        if(gertudesprevrad == 1)
+            finalpay = finalpay - 1500;
+        else if(gertudesprevrad == 2)
+            finalpay = finalpay - 1500;
+        else if(gertudesprevrad == 3)
+            finalpay = finalpay - 1700;
+        else if(gertudesprevrad == 4)
+            finalpay = finalpay - 2500;
+        finalpay = finalpay + 4500;
+        $('#gertudesprice5').fadeIn('slow');
+        $('#gertudesprice1').hide();
+        $('#gertudesprice2').hide();
+        $('#gertudesprice3').hide();
+        $('#gertudesprice4').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        gertudesprevrad = 5;
+    }
+    else{
+        $('#gertudesprice5').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+    $("#cat_id").val(finalpay);
+});
+
+// Raphael Radio Buttons
+
+$('#raphaelRadio1').change(function(){
+    if($('#raphaelRadio1').is(':checked')){
+        if(raphaelprevrad == 2)
+            finalpay = finalpay - 1990;
+        else if(raphaelprevrad == 3)
+            finalpay = finalpay - 9990;
+        finalpay = finalpay + 4990;
+        $('#raphaelprice1').fadeIn('slow');
+        $('#raphaelprice2').hide();
+        $('#raphaelprice3').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        raphaelprevrad = 1;
+    }
+    else{
+        $('#raphaelprice1').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+    $("#cat_id").val(finalpay);
+});
+
+$('#raphaelRadio2').change(function(){
+    if($('#raphaelRadio2').is(':checked')){
+        if(raphaelprevrad == 1)
+            finalpay = finalpay - 4990;
+        else if(raphaelprevrad == 3)
+            finalpay = finalpay - 9990;
+        finalpay = finalpay + 1990;
+        $('#raphaelprice2').fadeIn('slow');
+        $('#raphaelprice1').hide();
+        $('#raphaelprice3').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        raphaelprevrad = 2;
+    }
+    else{
+        $('#raphaelprice2').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+    $("#cat_id").val(finalpay);
+});
+
+$('#raphaelRadio3').change(function(){
+    if($('#raphaelRadio3').is(':checked')){
+        if(raphaelprevrad == 1)
+            finalpay = finalpay - 4990;
+        else if(raphaelprevrad == 2)
+            finalpay = finalpay - 1990;
+        finalpay = finalpay + 9990;
+        $('#raphaelprice3').fadeIn('slow');
+        $('#raphaelprice1').hide();
+        $('#raphaelprice2').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        raphaelprevrad = 3;
+    }
+    else{
+        $('#raphaelprice3').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+    $("#cat_id").val(finalpay);
+});
+
+// La Rose Radio Buttons
+
+$('#laroseRadio1').change(function(){
+    if($('#laroseRadio1').is(':checked')){
+        if(laroseprevrad == 2)
+            finalpay = finalpay - 2500;
+        finalpay = finalpay + 7500;
+        $('#laroseprice1').fadeIn('slow');
+        $('#laroseprice2').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        laroseprevrad = 1;
+    }
+    else{
+        $('#laroseprice1').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+    }
+    $("#cat_id").val(finalpay);
+});
+
+$('#laroseRadio2').change(function(){
+    if($('#laroseRadio2').is(':checked')){
+        if(laroseprevrad == 1)
+            finalpay = finalpay - 7500;
+        finalpay = finalpay + 2500;
+        $('#laroseprice2').fadeIn('slow');
+        $('#laroseprice1').hide();
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        laroseprevrad = 2;
+    }
+    else{
+        $('#laroseprice2').hide();
         $("#totalpay").empty();
         $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
     }
