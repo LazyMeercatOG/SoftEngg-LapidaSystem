@@ -1,10 +1,15 @@
-{% extends "lapida_app/base.html" %} {% load static %} {% block content %}
+{% extends "lapida_app/base.html" %} {% load static %} 
+{% load sweetify %}
+{% block content %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Snippet - BBBootstrap</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <link
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       rel="stylesheet"
@@ -158,13 +163,16 @@
     ></script>
     <script type="text/javascript"></script>
   </head>
+  {% sweetify %}
   <body oncontextmenu="return false" class="snippet-body">
     <div class="container">
       <div class="row">
         <div class="col-md-6">
           <div class="card">
-            {% if message_error %} {{message_error}} {%endif%}
             <form class="box" method="POST">
+              <p class="text-muted">
+                {% if message_error %} {{message_error}} {%endif%}
+              </p>
               {%csrf_token%}
               <h1>Login</h1>
               <p class="text-muted">Please enter your login and password!</p>
