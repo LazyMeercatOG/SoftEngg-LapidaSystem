@@ -609,6 +609,7 @@ $('#graveCheck').change(function(){
 
 
 $('#flowerSelect').change(function(){
+    $('#floralheader').fadeIn('slow');
     if(this.value == "citifora"){
         $('#citiforaprice1, #citiforaprice2, #citiforaprice3, #citiforaprice4, #gertudesprice1, #gertudesprice2, #gertudesprice3, #gertudesprice4, #gertudesprice5, #raphaelprice1, #raphaelprice2, #raphaelprice3, #laroseprice1, #laroseprice2').hide();
         $('#citiforagroup').fadeIn('slow');
@@ -827,10 +828,122 @@ $('#flowerSelect').change(function(){
 
 $('#flowerCheck').change(function(){
     if($('#flowerCheck').is(':checked')){
-        $('#floralheader').fadeIn('slow');
+        if($('#flowerSelect').val() != null)
+            $('#floralheader').fadeIn('slow');
+        if($('#flowerSelect').val() == "citifora"){
+            $('#citiforagroup').fadeIn('slow');
+            if($('#citiforaRadio1').is(':checked')){
+                finalpay = finalpay + 3490;
+                $('#citiforaprice1').fadeIn('slow');
+            }
+            else if($('#citiforaRadio2').is(':checked')){
+                finalpay = finalpay + 3490;
+                $('#citiforaprice2').fadeIn('slow');
+            }
+            else if($('#citiforaRadio3').is(':checked')){
+                finalpay = finalpay + 3000;
+                $('#citiforaprice3').fadeIn('slow');
+            }
+            else if($('#citiforaRadio4').is(':checked')){
+                finalpay = finalpay + 3490;
+                $('#citiforaprice4').fadeIn('slow');
+            }
+        }
+        else if($('#flowerSelect').val() == "gertudes"){
+            $('#gertudesgroup').fadeIn('slow');
+            if($('#gertudesRadio1').is(':checked')){
+                finalpay = finalpay + 1500;
+                $('#gertudesprice1').fadeIn('slow');
+            }
+            else if($('#gertudesRadio2').is(':checked')){
+                finalpay = finalpay + 1500;
+                $('#gertudesprice2').fadeIn('slow');
+            }
+            else if($('#gertudesRadio3').is(':checked')){
+                finalpay = finalpay + 1700;
+                $('#gertudesprice3').fadeIn('slow');
+            }
+            else if($('#gertudesRadio4').is(':checked')){
+                finalpay = finalpay + 2500;
+                $('#gertudesprice4').fadeIn('slow');
+            }
+            else if($('#gertudesRadio5').is(':checked')){
+                finalpay = finalpay + 4500;
+                $('#gertudesprice5').fadeIn('slow');
+            }
+        }
+        else if($('#flowerSelect').val() == "raphael"){
+            $('#raphaelgroup').fadeIn('slow');
+            if($('#raphaelRadio1').is(':checked')){
+                finalpay = finalpay + 4990;
+                $('#raphaelprice1').fadeIn('slow');
+            }
+            else if($('#raphaelRadio2').is(':checked')){
+                finalpay = finalpay + 1990;
+                $('#raphaelprice2').fadeIn('slow');
+            }
+            else if($('#raphaelRadio3').is(':checked')){
+                finalpay = finalpay + 9990;
+                $('#raphaelprice3').fadeIn('slow');
+            }
+        }
+        else if($('#flowerSelect').val() == "larose"){
+            $('#larosegroup').fadeIn('slow');
+            if($('#laroseRadio1').is(':checked')){
+                finalpay = finalpay + 7500;
+                $('#laroseprice1').fadeIn('slow');
+            }
+            else if($('#laroseRadio2').is(':checked')){
+                finalpay = finalpay + 2500;
+                $('#laroseprice2').fadeIn('slow');
+            }
+        }
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
     }
     else{
-        $('#flowerSelect').val('default').change();
+
+        if($('#flowerSelect').val() == "citifora"){
+            if($('#citiforaRadio1').is(':checked'))
+                finalpay = finalpay - 3490;
+            else if($('#citiforaRadio2').is(':checked'))
+                finalpay = finalpay - 3490;
+            else if($('#citiforaRadio3').is(':checked'))
+                finalpay = finalpay - 3000;
+            else if($('#citiforaRadio4').is(':checked'))
+                finalpay = finalpay - 3490;
+        }
+        else if($('#flowerSelect').val() == "gertudes"){
+            if($('#gertudesRadio1').is(':checked'))
+                finalpay = finalpay - 1500;
+            else if($('#gertudesRadio2').is(':checked'))
+                finalpay = finalpay - 1500;
+            else if($('#gertudesRadio3').is(':checked'))
+                finalpay = finalpay - 1700;
+            else if($('#gertudesRadio4').is(':checked'))
+                finalpay = finalpay - 2500;
+            else if($('#gertudesRadio5').is(':checked'))
+                finalpay = finalpay - 4500;
+        }
+        else if($('#flowerSelect').val() == "raphael"){
+            if($('#raphaelRadio1').is(':checked'))
+                finalpay = finalpay - 4990;
+            else if($('#raphaelRadio2').is(':checked'))
+                finalpay = finalpay - 1990;
+            else if($('#raphaelRadio3').is(':checked'))
+                finalpay = finalpay - 9990;
+        }
+        else if($('#flowerSelect').val() == "larose"){
+            if($('#laroseRadio1').is(':checked'))
+                finalpay = finalpay - 7500;
+            else if($('#laroseRadio2').is(':checked'))
+                finalpay = finalpay - 2500;
+        }
+
+        $("#totalpay").empty();
+        $( ".totalpay" ).append( "<span><strong>₱" + finalpay + ".00</strong></span>" );
+        $('#citiforaprice1, #citiforaprice2, #citiforaprice3, #citiforaprice4, #gertudesprice1, #gertudesprice2, #gertudesprice3, #gertudesprice4, #gertudesprice5, #raphaelprice1, #raphaelprice2, #raphaelprice3, #laroseprice1, #laroseprice2').hide();
+        
         $('#citiforagroup').hide();
         $('#gertudesgroup').hide();
         $('#raphaelgroup').hide();
