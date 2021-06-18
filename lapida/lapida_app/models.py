@@ -18,6 +18,7 @@ Status = (
     ("C", "Completed"),
     ("Pa", "Paid"),
     ("O", "Ongoing"),
+    ("NT", "Not taken"),
 )
 
 cemeteries = (
@@ -90,5 +91,7 @@ class Order_User(models.Model):
 
 
 class Caretaker_Task(models.Model):
-    caretaker = models.ForeignKey(CareTaker, on_delete=models.CASCADE)
+    caretaker = models.ForeignKey(
+        CareTaker, on_delete=models.SET_NULL, blank=True, null=True
+    )
     order = models.ForeignKey(Order_User, on_delete=models.CASCADE)

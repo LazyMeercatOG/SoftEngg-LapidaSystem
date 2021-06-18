@@ -205,6 +205,10 @@ def dashboard(request):
     tasks = []
     for task in caretaker_task:
         tasks.append(Order_User.objects.get(caretaker_task=task))
+    caretaker_task_none = Caretaker_Task.objects.filter(caretaker=None)
+    print(caretaker_task_none)
+    for task in caretaker_task_none:
+        tasks.append(Order_User.objects.get(caretaker_task=task))
     context = {"form": tasks}
     return render(request, "lapida_app/dashboard.html", context)
 
@@ -242,7 +246,7 @@ def menu(request):
             options.append("₱" + str(totalpay))
             options.append(note)
             options = "\n".join(options)
-            instance.status = "P"
+            instance.status = "NT"
             instance.price = totalpay
             instance.services = options
             instance.note = note
@@ -253,7 +257,23 @@ def menu(request):
             caretaker_p = []
             for i in caretaker_profile:
                 caretaker_p.append(i)
-            caretaker_task_instance = Caretaker_Task(caretaker=caretaker_p[0])
+            caretaker_task_instance = Caretaker_Task(caretaker=None)
+            # User = get_user_model()
+            # user = User.objects.get(pk=caretaker_p[0].user.id)
+            # user_email = user.email
+            # current_site = get_current_site(request)
+            # mail_subject = "New Task"
+            # message = render_to_string(
+            #     "lapida_app/verification.html",
+            #     {
+            #         "user": user,
+            #         "domain": current_site.domain,
+            #         "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+            #         "token": account_activation_token.make_token(user),
+            #     },
+            # )
+            # to_email = user_email
+            # send_mail(mail_subject, message, EMAIL_HOST_USER, [to_email])
             caretaker_task_instance.order = instance
             caretaker_task_instance.save()
             return redirect("summary", instance.id)

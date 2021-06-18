@@ -176,7 +176,7 @@ body {
 									{%for item in form%}
 									{%if item.status == "C"%}
 									<tr data-status="pagado">
-									{%elif item.status == "P" or item.status == "O" or item.status == "Pa" %}
+									{%elif item.status == "P" or item.status == "O" or item.status == "Pa" or item.status == "NT" %}
 									<tr data-status="pendiente">
 									{%elif item.status == "Ca"%}
 									<tr data-status="cancelado">
@@ -190,7 +190,7 @@ body {
 												<a href="{%url 'summary' id=item.id%}" class="pull-left">
 													{%if item.status == "C"%}
 													<i class='bx bx-check bx-lg' style="font-size:30px"></i>
-													{%elif item.status == "P" or item.status == "O" or item.status == "Pa" %}
+													{%elif item.status == "P" or item.status == "O" or item.status == "Pa" or item.status == "NT"%}
 													<i class='bx bx-loader bx-lg' style="font-size:30px"></i>
 													{%elif item.status == "Ca"%}
 													<i class='bx bx-x bx-lg' style="font-size:30px"></i>
@@ -206,7 +206,7 @@ body {
 														</div>
 														{%if item.status == "C"%}
 														<span class="pull-right pagado" style="font-size:16px">{{item.get_status_display}}</span>
-														{%elif item.status == "P" or item.status == "O" or item.status == "Pa" %}
+														{%elif item.status == "P" or item.status == "O" or item.status == "Pa" or item.status == "NT" %}
 														<span class="pull-right pendiente" style="font-size:16px">{{item.get_status_display}}</span>
 														{%elif item.status == "Ca"%}
 														<span class="pull-right cancelado" style="font-size:16px">{{item.get_status_display}}</span>
