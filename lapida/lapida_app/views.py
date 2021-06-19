@@ -30,6 +30,10 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from lapida.settings import EMAIL_HOST_USER
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.cache import cache
+import datetime
 
 
 def index(request):
@@ -206,7 +210,6 @@ def dashboard(request):
     for task in caretaker_task:
         tasks.append(Order_User.objects.get(caretaker_task=task))
     caretaker_task_none = Caretaker_Task.objects.filter(caretaker=None)
-    print(caretaker_task_none)
     for task in caretaker_task_none:
         tasks.append(Order_User.objects.get(caretaker_task=task))
     context = {"form": tasks}
@@ -379,7 +382,6 @@ def summary(request, id):
 
 def approve_payment(request, id):
     order = Order_User.objects.get(id=id)
-    print(order)
     order.status = "Pa"
     order.save()
     context = {"form": order}
@@ -392,7 +394,6 @@ def no_permission(request):
 
 def update_picture(request, id):
     if request.method == "POST":
-        print("POST")
         order = Order_User.objects.get(id=id)
         order.image = request.FILES["image"]
         order.save()
@@ -410,11 +411,67 @@ def update_status(request, id):
     context = {"form": order}
 
 
+def reserve_task(request, id):
+    order = Order_User.objects.get(id=id)
+    order_date = datetime.datetime.strftime(order.order_date, "%Y-%m-%d")
+    caretaker_profile = CareTaker.objects.get(user=request.user)
+    existing_order = Caretaker_Task.objects.filter(caretaker=caretaker_profile)
+    order_date_to_be_checked = []
+    for x in existing_order:
+        if x:
+            past_order = x.order
+            order_date_to_be_checked.append(
+                datetime.datetime.strftime(past_order.order_date, "%Y-%m-%d")
+            )
+    print(order_date_to_be_checked)
+    print(order_date)
+    if order_date in order_date_to_be_checked:
+        print("ERROR")
+        sweetify.error(
+            request,
+            "YOU HAVE REACHED YOUR DAILY QUOTA",
+            persistent=":(",
+        )
+        return redirect("summary", order.id)
+    else:
+        order.status = "P"
+        caretaker_task_instance = Caretaker_Task.objects.get(order=order)
+        caretaker_task_instance.caretaker = caretaker_profile
+        order.save()
+        caretaker_task_instance.save()
+        User = get_user_model()
+        user = User.objects.get(pk=caretaker_profile.user.id)
+        user_email = user.email
+        current_site = get_current_site(request)
+        mail_subject = "New Task"
+        message = render_to_string(
+            "lapida_app/email_notification.html",
+            {
+                "user": user,
+                "domain": current_site.domain,
+                "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                "token": account_activation_token.make_token(user),
+            },
+        )
+        to_email = user_email
+        send_mail(mail_subject, message, EMAIL_HOST_USER, [to_email])
+        return redirect("summary", order.id)
+
+
+@receiver(post_save, sender=reserve_task)
+def clear_cache(sender, instance, **kwargs):
+    cache.clear()
+    # call cache clear here
+
+
 def cancel_request(request, id):
     order = Order_User.objects.get(id=id)
-    order.status = "Ca"
-    order.save()
-    context = {"form": order}
+    if order.status == "NT":
+        order.delete()
+    else:
+        order.status = "Ca"
+        order.save()
+        context = {"form": order}
 
 
 def export(request):

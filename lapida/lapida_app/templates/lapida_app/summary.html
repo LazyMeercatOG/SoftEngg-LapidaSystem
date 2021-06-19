@@ -2,8 +2,13 @@
 {% load static %}
 {% block content  %}
 {% load auth_extras %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-<link href="{% static 'lapida_app/summary/summary.css'%}" rel="stylesheet">
+{% load sweetify %}
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+  <link href="{% static 'lapida_app/summary/summary.css'%}" rel="stylesheet">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+  {% sweetify %}
 {% if request.user|has_group:"customer" %} 
 <div class="container">
     <div class="row">
@@ -23,11 +28,13 @@
                 <p class="mb-0"><b>Note:</b> {{form.note}}</p>
                 {%endif%}
             </div><!-- / project-info-box -->
-            {%if form.status == "P" and form.status != "Ca" %}
+            {%if form.status == "NT" %}
             <div class="project-info-box mt-0 mb-0">
-                            <a href="" order_id="{{form.id}}" class="btn btn-danger btn-lg ddf"> Cancel
-                            </a>
+                            <a href="" order_id="{{form.id}}" class="btn btn-danger btn-lg eef"> Cancel</a>
     <!-- Set up a container element for the button -->
+    {%elif form.status == "P" %}
+                    <div class="project-info-box mt-0 mb-0">
+                            <a href="" order_id="{{form.id}}" class="btn btn-danger btn-lg ddf"> Cancel</a>
     <div id="paypal-button-container"></div>
                 </p>
             </div><!-- / project-info-box -->
@@ -46,7 +53,6 @@
             </div>
             <div class="project-info-box">
                 <p><b>Latest Time Updated:</b> {{form.uptime}}</p>
-                <p><b>Skills:</b> Illustrator</p>
             </div><!-- / project-info-box -->
         </div><!-- / column -->
         {%endif%}
@@ -55,6 +61,7 @@
 </div>
 {% elif request.user|has_group:"caretaker" %}
 <div class="container">
+
     <div class="row">
         <div class="col-md-5">
             <div class="project-info-box">
@@ -72,9 +79,8 @@
                 <p class="mb-0"><b>Note:</b> {{form.note}}</p>
                 {%endif%}
             </div><!-- / project-info-box -->
-{%if form.status != "Ca" %}
+{%if form.status != "Ca" and form.status != "C" and form.status != "NT" %}
             <div class="col-md-13">
-                        
                         <div class="project-info-box">
                             <form action="{%url 'update-picture' id=form.id%}" method ="POST" enctype="multipart/form-data">
                             {%csrf_token%}
@@ -88,11 +94,7 @@
                             {%endif%}
                             </div>
                     </div>
-
         </div>
-
-
-
         <!-- / column -->
         <div class="col-md-7">
             <div class="project-info-box">
@@ -101,9 +103,15 @@
             </div>
             <div class="project-info-box">
                 <p><b>Latest Time Updated:</b> {{form.uptime}}</p>
-                <p><b>Skills:</b> Illustrator</p>
             </div><!-- / project-info-box -->
         </div><!-- / column -->
+{%elif form.status == "NT" %}
+            <div class="col-md-13">
+                        <div class="project-info-box">
+                                    <a href="" order_id="{{form.id}}" class="btn btn-success btn-lg ccf"> Claim this Task 
+                            </a>
+                        </div>
+            </div>
 {%endif%}
 
     </div>
@@ -203,6 +211,54 @@ $(function() {
       
 });
 
+
+    $('.ccf').click(function (e) {
+      e.preventDefault();
+      var tthis = $(this);
+      var usersid =  $(this).attr("order_id");
+      var url = "{% url 'reserved-status' id=1 %}".replace('1', usersid);
+      var url_href = "{% url 'summary' id=1 %}".replace('1', usersid);
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You're gonna reserve this task to your account",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, update it!',
+      cancelButtonText: "No, I don't want to!",
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Reserved!',
+          'This task has been reserved to you',
+          'success'
+        ).then(function(){ 
+    $.get( url, function( data ) { 
+  });
+    location.href = url_href
+   });
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your request is cancelled. :)',
+          'error'
+        )
+      }
+    })
+     
+      
+});
+
     $('.ddf').click(function (e) {
       e.preventDefault();
       var tthis = $(this);
@@ -249,8 +305,60 @@ $(function() {
      
       
 });
+
+
+    $('.eef').click(function (e) {
+      e.preventDefault();
+      var tthis = $(this);
+      var usersid =  $(this).attr("order_id");
+      var url = "{% url 'cancel-status' id=1 %}".replace('1', usersid);
+      var url_href = "{% url 'profile' %}";
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You're updating the status of this order to Cancel",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, update it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Updated!',
+          'Your task has been updated!',
+          'success'
+        ).then(function(){ 
+    $.get( url, function( data ) { 
+  });
+    location.href = url_href
+   });
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your request is cancelled. :)',
+          'error'
+        )
+      }
+    })
+     
+      
+});
+
 });
 
 </script>
+
+
+
 
 {%endblock%}
