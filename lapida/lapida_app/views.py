@@ -22,7 +22,7 @@ from .models import (
 from .resources import MasterData_RevisedResource
 from django.core.exceptions import ObjectDoesNotExist
 import sweetify
-from django.core.mail import send_mail
+from django.core.mail import send_mail, BadHeaderError
 from .tokens import account_activation_token
 from django.contrib.auth import get_user_model
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -34,6 +34,10 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.cache import cache
 import datetime
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.models import User
+from django.db.models.query_utils import Q
+from django.contrib.auth.tokens import default_token_generator
 
 
 def index(request):
@@ -321,7 +325,7 @@ def get_cemetery(place):
         final_place = "MS"
     elif place == "La Loma C":
         final_place = "L"
-    elif place == " Manila Chinese C":
+    elif place == "Manila Chinese C":
         final_place = "MC"
     return final_place
 
@@ -423,10 +427,7 @@ def reserve_task(request, id):
             order_date_to_be_checked.append(
                 datetime.datetime.strftime(past_order.order_date, "%Y-%m-%d")
             )
-    print(order_date_to_be_checked)
-    print(order_date)
     if order_date in order_date_to_be_checked:
-        print("ERROR")
         sweetify.error(
             request,
             "YOU HAVE REACHED YOUR DAILY QUOTA",
@@ -488,6 +489,45 @@ def export(request):
 
 def handle404(request, exception):
     return render(request, "lapida_app/404.html", status=404)
+
+
+def password_reset_request(request):
+    if request.method == "POST":
+        password_reset_form = PasswordResetForm(request.POST)
+        if password_reset_form.is_valid():
+            data = password_reset_form.cleaned_data["email"]
+            associated_users = User.objects.filter(Q(email=data))
+            if associated_users.exists():
+                for user in associated_users:
+                    subject = "Password Reset Requested"
+                    email_template_name = "lapida_app/password_message.html"
+                    c = {
+                        "email": user.email,
+                        "domain": "127.0.0.1:8000",
+                        "site_name": "Website",
+                        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                        "user": user,
+                        "token": default_token_generator.make_token(user),
+                        "protocol": "http",
+                    }
+                    email = render_to_string(email_template_name, c)
+                    try:
+                        send_mail(
+                            subject,
+                            email,
+                            "admin@example.com",
+                            [user.email],
+                            fail_silently=False,
+                        )
+                    except BadHeaderError:
+                        return HttpResponse("Invalid header found.")
+                    return redirect("/password_reset/done/")
+    password_reset_form = PasswordResetForm()
+    return render(
+        request=request,
+        template_name="lapida_app/password_reset.html",
+        context={"password_reset_form": password_reset_form},
+    )
 
 
 # Create your views here.
